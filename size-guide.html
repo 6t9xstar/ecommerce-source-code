@@ -1,0 +1,37 @@
+<!-- Size Guide Modal Component -->
+<div id="size-guide-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+  <div class="flex items-center justify-center min-h-screen p-6">
+    <div class="w-full max-w-3xl glass-panel border-white/10 p-8 md:p-12 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="ProductDetail.closeSizeGuide()" class="absolute top-6 right-6 text-white/40 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <h3 class="font-display text-2xl uppercase tracking-[0.2em] mb-8">Sovereign Size Guide</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-white/10">
+              <th class="py-4 text-[10px] tracking-[0.3em] uppercase text-white/40">Size</th>
+              <th class="py-4 text-[10px] tracking-[0.3em] uppercase text-white/40">Chest (in)</th>
+              <th class="py-4 text-[10px] tracking-[0.3em] uppercase text-white/40">Waist (in)</th>
+              <th class="py-4 text-[10px] tracking-[0.3em] uppercase text-white/40">Length (in)</th>
+            </tr>
+          </thead>
+          <tbody class="text-xs tracking-[0.2em] uppercase">
+            <tr class="border-b border-white/5"><td class="py-4">XS</td><td class="py-4 text-white/60">34-36</td><td class="py-4 text-white/60">28-30</td><td class="py-4 text-white/60">26</td></tr>
+            <tr class="border-b border-white/5"><td class="py-4">S</td><td class="py-4 text-white/60">36-38</td><td class="py-4 text-white/60">30-32</td><td class="py-4 text-white/60">27</td></tr>
+            <tr class="border-b border-white/5"><td class="py-4">M</td><td class="py-4 text-white/60">38-40</td><td class="py-4 text-white/60">32-34</td><td class="py-4 text-white/60">28</td></tr>
+            <tr class="border-b border-white/5"><td class="py-4">L</td><td class="py-4 text-white/60">40-42</td><td class="py-4 text-white/60">34-36</td><td class="py-4 text-white/60">29</td></tr>
+            <tr class="border-b border-white/5"><td class="py-4">XL</td><td class="py-4 text-white/60">42-44</td><td class="py-4 text-white/60">36-38</td><td class="py-4 text-white/60">30</td></tr>
+            <tr><td class="py-4">XXL</td><td class="py-4 text-white/60">44-46</td><td class="py-4 text-white/60">38-40</td><td class="py-4 text-white/60">31</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-8 pt-8 border-t border-white/10">
+        <p class="text-[10px] tracking-[0.2em] uppercase text-white/40 leading-relaxed">
+          <i data-lucide="info" class="w-4 h-4 inline mr-2"></i>
+          Measurements are in inches. For the best fit, measure your chest at the fullest part and waist at the narrowest point. If between sizes, we recommend sizing up for a relaxed fit or down for a tailored fit.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

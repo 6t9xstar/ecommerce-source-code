@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | THREE CROWN WEAR</title>
+  
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; font-src 'self' https: data:;">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    :root {
+      --admin-bg: #000000;
+      --admin-text: #FFFFFF;
+      --admin-border: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-pure-black text-pure-white flex items-center justify-center min-h-screen relative overflow-hidden">
+  
+  <div class="absolute inset-0 bg-monochrome-glow opacity-50 z-0"></div>
+  <div class="absolute inset-0 bg-noise opacity-5 z-0"></div>
+
+  <div class="w-full max-w-md p-12 glass-panel border border-white/10 relative z-10 animate-fade-in shadow-2xl">
+     <div class="text-center mb-16">
+        <h2 class="font-display text-2xl tracking-[0.4em] uppercase mb-4">THREE CROWN</h2>
+        <span class="text-[10px] tracking-[0.5em] uppercase text-white/40">Sovereign Portal</span>
+     </div>
+
+     <form id="login-form" class="space-y-12">
+        <div>
+           <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Archive ID</label>
+           <input type="text" id="username" required placeholder="ADMIN" class="input-premium">
+        </div>
+
+        <div>
+           <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Cryptic Key</label>
+           <input type="password" id="password" required placeholder="••••••••" class="input-premium">
+        </div>
+
+        <div class="pt-12">
+           <button type="submit" class="btn-primary w-full">Access Registry</button>
+        </div>
+     </form>
+
+     <div class="mt-12 text-center">
+        <a href="../index.html" class="text-[10px] tracking-[0.4em] uppercase text-white/20 hover:text-white transition-all">&larr; Return to Kingdom</a>
+     </div>
+  </div>
+
+  <!-- Toast Container for messages -->
+  <div id="toast-container" class="fixed bottom-12 right-12 z-[100] flex flex-col gap-4"></div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+       e.preventDefault();
+       const user = document.getElementById('username').value;
+       const pass = document.getElementById('password').value;
+
+       // Security: Use the hashSecure utility for verification simulation
+       const passHash = await hashSecure(pass);
+       
+       // Default credentials for the static demo: admin / admin
+       // In a real app, this would be a server-side check.
+       if (user === 'admin' && pass === 'admin') {
+          localStorage.setItem('tcw_admin', 'true');
+          localStorage.setItem('tcw_admin_user', user);
+          ThreeCrown.showToast('Access Granted. Entering Registry...', 'success');
+          setTimeout(() => window.location.href = 'dashboard.html', 1500);
+       } else {
+          ThreeCrown.showToast('Invalid Artifact Sequence.', 'error');
+       }
+    });
+
+    // Check if already logged in
+    if (localStorage.getItem('tcw_admin') === 'true') {
+       window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

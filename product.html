@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | THREE CROWN WEAR</title>
+  
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; font-src 'self' https: data:;">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Discover the monarchal excellence of THREE CROWN WEAR. Hand-crafted luxury garments and accessories for the modern sovereign.">
+  <meta property="og:title" content="THREE CROWN WEAR | Sovereign Fashion">
+  <meta property="og:description" content="Premium monochrome apparel and accessories. Experience the heritage of the Kingdom.">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="THREE CROWN WEAR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@threecrownwear">
+  <meta name="theme-color" content="#000000">
+</head>
+<body class="bg-pure-black text-pure-white selection:bg-pure-white selection:text-pure-black">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-pure-black/80 backdrop-blur-md border-b border-white/5 py-6 px-6 md:px-12">
+    <div class="max-w-[1800px] mx-auto flex items-center justify-between">
+      <a href="index.html" class="font-display text-xl tracking-[0.3em] font-medium">
+        THREE CROWN WEAR
+      </a>
+      
+      <div class="hidden lg:flex items-center gap-16">
+        <a href="shop.html" class="nav-link">Collections</a>
+        <a href="about.html" class="nav-link">Kingdom</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-8">
+        <button id="search-trigger" class="hover:opacity-60 transition-opacity">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </button>
+        <button id="cart-btn" class="relative hover:opacity-60 transition-opacity">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cart-count" class="absolute -top-2 -right-2 w-4 h-4 bg-pure-white text-pure-black text-[10px] rounded-full flex items-center justify-center hidden">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-48 pb-32 px-6 md:px-12 container mx-auto">
+     <div id="product-details" class="grid grid-cols-1 lg:grid-cols-2 gap-24 relative">
+        <!-- Main Image Gallery -->
+        <div class="space-y-4">
+           <div class="aspect-[4/5] bg-white/5 border border-white/10 overflow-hidden relative group">
+              <img id="main-image" src="" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="">
+           </div>
+           <div id="image-thumbnails" class="grid grid-cols-4 gap-4"></div>
+        </div>
+
+        <!-- Product Information -->
+        <div class="static lg:sticky top-48 h-fit">
+           <div class="mb-12 border-b border-white/5 pb-12">
+              <span id="p-category" class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">CATEGORY</span>
+              <h1 id="p-name" class="font-display text-4xl md:text-6xl uppercase leading-tight mb-8">PRODUCT NAME</h1>
+              <span id="p-price" class="font-display text-3xl text-white/80">$0.00</span>
+           </div>
+
+           <div class="mb-12">
+              <p id="p-description" class="text-white/40 text-sm tracking-widest uppercase leading-relaxed"></p>
+           </div>
+
+           <div id="p-tags-container" class="flex flex-wrap gap-4 mb-12">
+              <!-- Dynamic Tags -->
+           </div>
+
+           <div class="space-y-12">
+              <div id="size-selector-container">
+                 <div class="flex items-center justify-between mb-6">
+                    <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60">Size Selection</h4>
+                    <button onclick="ProductDetail.openSizeGuide()" class="text-[10px] tracking-[0.2em] uppercase text-white/40 hover:text-white transition-all flex items-center gap-2">
+                       <i data-lucide="ruler" class="w-3 h-3"></i> Size Guide
+                    </button>
+                 </div>
+                 <div id="size-options" class="flex flex-wrap gap-4"></div>
+              </div>
+
+              <div id="color-selector-container">
+                 <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-6">Color Selection</h4>
+                 <div id="color-options" class="flex flex-wrap gap-4"></div>
+              </div>
+
+              <div class="pt-12 border-t border-white/5">
+                 <button onclick="ProductDetail.addToCart()" class="btn-primary w-full group">
+                    Add to Kingdom
+                    <i data-lucide="arrow-right" class="w-4 h-4 ml-4 translate-x-0 group-hover:translate-x-2 transition-transform"></i>
+                 </button>
+                 <p id="stock-info" class="text-[10px] tracking-[0.4em] uppercase text-white/20 text-center mt-6">Only a few pieces remain in the archive.</p>
+              </div>
+
+              <!-- Trust Badges -->
+              <div class="grid grid-cols-3 gap-4 pt-12 border-t border-white/5">
+                 <div class="text-center p-4">
+                    <i data-lucide="shield-check" class="w-5 h-5 mx-auto mb-3 text-white/40"></i>
+                    <span class="text-[8px] tracking-[0.2em] uppercase text-white/30 block">Secure Protocol</span>
+                 </div>
+                 <div class="text-center p-4">
+                    <i data-lucide="globe" class="w-5 h-5 mx-auto mb-3 text-white/40"></i>
+                    <span class="text-[8px] tracking-[0.2em] uppercase text-white/30 block">Global Reach</span>
+                 </div>
+                 <div class="text-center p-4">
+                    <i data-lucide="award" class="w-5 h-5 mx-auto mb-3 text-white/40"></i>
+                    <span class="text-[8px] tracking-[0.2em] uppercase text-white/30 block">Royalty Grade</span>
+                 </div>
+              </div>
+
+              <!-- Product Details Accordion -->
+              <div class="space-y-4 pt-12 border-t border-white/5">
+                 <div class="accordion-item border-b border-white/5 pb-4">
+                    <button onclick="ProductDetail.toggleAccordion('specs')" class="w-full flex justify-between items-center text-[10px] tracking-[0.4em] uppercase hover:text-white/60 transition-all">
+                       Specifications
+                       <i data-lucide="plus" id="specs-icon" class="w-3 h-3 transition-transform"></i>
+                    </button>
+                    <div id="specs-content" class="hidden pt-6">
+                       <ul id="p-highlights" class="text-[10px] tracking-[0.2em] uppercase text-white/40 space-y-3 list-disc pl-4"></ul>
+                    </div>
+                 </div>
+                 <div class="accordion-item border-b border-white/5 pb-4">
+                    <button onclick="ProductDetail.toggleAccordion('shipping')" class="w-full flex justify-between items-center text-[10px] tracking-[0.4em] uppercase hover:text-white/60 transition-all">
+                       Shipping Protocols
+                       <i data-lucide="plus" id="shipping-icon" class="w-3 h-3 transition-transform"></i>
+                    </button>
+                    <div id="shipping-content" class="hidden pt-6">
+                       <p id="p-shipping" class="text-[10px] tracking-[0.2em] uppercase text-white/40 leading-relaxed"></p>
+                    </div>
+                 </div>
+                 <div class="accordion-item border-b border-white/5 pb-4">
+                    <button onclick="ProductDetail.toggleAccordion('refunds')" class="w-full flex justify-between items-center text-[10px] tracking-[0.4em] uppercase hover:text-white/60 transition-all">
+                       Refund Sovereignty
+                       <i data-lucide="plus" id="refunds-icon" class="w-3 h-3 transition-transform"></i>
+                    </button>
+                    <div id="refunds-content" class="hidden pt-6">
+                       <p id="p-refunds" class="text-[10px] tracking-[0.2em] uppercase text-white/40 leading-relaxed"></p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+
+     <!-- Reviews Section -->
+     <section class="mt-48 pt-32 border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-24 gap-12">
+           <div>
+              <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Testimonials</span>
+              <h2 class="font-display text-4xl md:text-6xl uppercase tracking-[0.1em]">Sovereign Reviews</h2>
+           </div>
+           <div class="text-right">
+              <div id="p-rating-stars" class="flex gap-1 mb-4"></div>
+              <p id="p-rating-text" class="text-[10px] tracking-[0.4em] uppercase text-white/40"></p>
+           </div>
+        </div>
+        <!-- Write a Review Form -->
+        <div class="glass-panel border-white/10 p-8 md:p-12 mb-16">
+           <h3 class="font-display text-xl uppercase tracking-[0.2em] mb-8">Share Your Experience</h3>
+           <form id="review-form" class="space-y-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Your Name</label>
+                    <input type="text" name="reviewerName" required placeholder="Sovereign Name" class="input-premium">
+                 </div>
+                 <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Rating</label>
+                    <div class="flex gap-2" id="star-rating-input">
+                       <button type="button" data-rating="1" class="star-btn text-white/20 hover:text-white transition-all"><i data-lucide="star" class="w-6 h-6"></i></button>
+                       <button type="button" data-rating="2" class="star-btn text-white/20 hover:text-white transition-all"><i data-lucide="star" class="w-6 h-6"></i></button>
+                       <button type="button" data-rating="3" class="star-btn text-white/20 hover:text-white transition-all"><i data-lucide="star" class="w-6 h-6"></i></button>
+                       <button type="button" data-rating="4" class="star-btn text-white/20 hover:text-white transition-all"><i data-lucide="star" class="w-6 h-6"></i></button>
+                       <button type="button" data-rating="5" class="star-btn text-white/20 hover:text-white transition-all"><i data-lucide="star" class="w-6 h-6"></i></button>
+                    </div>
+                    <input type="hidden" name="rating" id="rating-value" required>
+                 </div>
+              </div>
+              <div>
+                 <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Your Review</label>
+                 <textarea name="reviewText" required placeholder="Share your thoughts on this artifact..." class="input-premium min-h-[120px]"></textarea>
+              </div>
+              <button type="submit" class="btn-primary py-4 px-12 text-xs">Submit Testimonial</button>
+           </form>
+        </div>
+
+        <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+           <!-- Dynamic Reviews -->
+        </div>
+     </section>
+
+     <!-- Related Products -->
+     <section class="mt-48 pt-32 border-t border-white/5">
+        <div class="mb-24">
+           <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Complete the Look</span>
+           <h2 class="font-display text-4xl md:text-6xl uppercase tracking-[0.1em]">Related Artifacts</h2>
+        </div>
+        <div id="related-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+           <!-- Dynamic Related Products -->
+        </div>
+     </section>
+
+     <div id="product-not-found" class="hidden text-center py-48">
+        <h3 class="font-display text-4xl mb-12">The artifact could not be located.</h3>
+        <a href="shop.html" class="btn-secondary">Back to Collections</a>
+     </div>
+  </main>
+
+  <!-- Imperial Newsletter -->
+  <section class="py-32 bg-pure-black border-t border-white/5 relative">
+     <div class="container mx-auto px-6 max-w-4xl text-center">
+        <h2 class="font-display text-3xl md:text-5xl tracking-[0.1em] uppercase mb-12 newsletter-reveal opacity-0">Enter THE ARCHIVE</h2>
+        <p class="text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16 newsletter-reveal opacity-0">Signatories receive early access to seasonal artifacts and royal drops.</p>
+        <form onsubmit="event.preventDefault(); ThreeCrown.showToast('PROTOCOL ACCEPTED. WELCOME TO THE KINGDOM.', 'success'); this.reset();" class="flex flex-col md:flex-row gap-6 justify-center items-center newsletter-reveal opacity-0">
+           <input type="email" placeholder="YOUR REGISTRY EMAIL" required class="bg-transparent border-b border-white/20 py-4 px-6 text-xs tracking-[0.3em] uppercase focus:outline-none focus:border-white transition-all w-full md:w-96 text-center">
+           <button type="submit" class="btn-primary py-4 px-12 text-xs">Authorize</button>
+        </form>
+     </div>
+  </section>
+
+  <!-- Advanced Footer -->
+  <footer class="bg-pure-black border-t border-white/5 py-32 px-6 md:px-12">
+    <div class="max-w-[1800px] mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-24 lg:gap-12 mb-32">
+        <div class="lg:col-span-1">
+          <h3 class="font-display text-xl tracking-[0.3em] mb-8 uppercase">THREE CROWN WEAR</h3>
+          <p class="text-white/40 text-xs tracking-widest uppercase leading-loose">
+            High performance monochrome aesthetics. <br>
+            Established 2024. <br>
+            The Kingdom Awaits.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Collections</h4>
+          <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+            <li><a href="shop.html?category=clothing" class="hover:text-white/60 transition-colors">Clothing</a></li>
+            <li><a href="shop.html?category=accessories" class="hover:text-white/60 transition-colors">Accessories</a></li>
+            <li><a href="shop.html?category=footwear" class="hover:text-white/60 transition-colors">Footwear</a></li>
+            <li><a href="shop.html?category=premium" class="hover:text-white/60 transition-colors">Crown Royal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Support</h4>
+          <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+            <li><a href="contact.html" class="hover:text-white/60 transition-colors">Contact Us</a></li>
+            <li><a href="about.html" class="hover:text-white/60 transition-colors">Our Story</a></li>
+            <li><a href="admin/index.html" class="hover:text-white/60 transition-colors">Admin Portal</a></li>
+            <li><a href="#" class="hover:text-white/60 transition-colors">Shipping & Returns</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Follow</h4>
+          <div class="flex gap-8">
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+          </div>
+          <div class="mt-12">
+             <p class="text-xs tracking-[0.4em] uppercase text-white/40">threecrownwear@gmail.com</p>
+             <p class="text-xs tracking-[0.4em] uppercase text-white/40 mt-2">+92 344 0455505</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-12">
+        <p class="text-[10px] tracking-[0.4em] uppercase text-white/20">&copy; 2024 THREE CROWN WEAR. All Rights Reserved.</p>
+        <div class="flex gap-12 mt-6 md:mt-0">
+           <a href="privacy.html" class="text-[10px] tracking-[0.4em] uppercase text-white/20 hover:text-white transition-colors">Privacy</a>
+           <a href="terms.html" class="text-[10px] tracking-[0.4em] uppercase text-white/20 hover:text-white transition-colors">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-pure-black border-l border-white/10 z-[110] translate-x-full transition-transform duration-700 ease-out">
+     <div class="flex flex-col h-full p-12">
+        <div class="flex items-center justify-between mb-16">
+           <h3 class="font-display text-2xl tracking-[0.2em] uppercase">Cart</h3>
+           <button id="close-cart" class="text-white/60 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto"></div>
+        <div class="mt-12 border-t border-white/5 pt-12">
+           <div class="flex justify-between items-center mb-12">
+              <span class="text-[10px] tracking-[0.5em] uppercase text-white/40">Subtotal</span>
+              <span id="cart-total" class="font-display text-2xl">$0.00</span>
+           </div>
+           <a href="checkout.html" id="checkout-btn" class="btn-primary w-full block text-center">Proceed to Checkout</a>
+        </div>
+     </div>
+  </div>
+  <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[105] hidden"></div>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-[100] bg-pure-black h-screen w-full hidden opacity-0">
+     <div class="flex flex-col items-center justify-center h-full px-6">
+        <button id="close-search" class="absolute top-12 right-12 text-white/60 hover:text-white transition-colors">
+           <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <div class="w-full max-w-4xl text-center">
+           <input type="text" id="search-input" placeholder="Search the Kingdom..." class="w-full bg-transparent border-b border-white/10 py-8 text-4xl md:text-7xl font-display text-center focus:outline-none focus:border-white transition-colors placeholder:text-white/10 uppercase">
+           <div id="search-results" class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left"></div>
+        </div>
+     </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-12 right-12 z-[200] flex flex-col gap-4"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    const ProductDetail = {
+       products: JSON.parse(localStorage.getItem('tcw_products') || '[]'),
+       currentProduct: null,
+       selectedSize: '',
+       selectedColor: '',
+
+       init() {
+          const params = new URLSearchParams(window.location.search);
+          const id = params.get('id');
+          this.currentProduct = this.products.find(p => p.id === id);
+
+          if (!this.currentProduct) {
+             document.getElementById('product-details').classList.add('hidden');
+             document.getElementById('product-not-found').classList.remove('hidden');
+             return;
+          }
+
+          this.render();
+       },
+
+       render() {
+          const p = this.currentProduct;
+          document.title = `${p.name} | THREE CROWN WEAR`;
+          
+          document.getElementById('main-image').src = p.images[0];
+          document.getElementById('p-name').textContent = p.name;
+          document.getElementById('p-price').textContent = `$${p.price.toFixed(2)}`;
+          document.getElementById('p-description').textContent = p.description;
+          document.getElementById('p-category').textContent = p.category;
+          
+          // Tags
+          const tagsContainer = document.getElementById('p-tags-container');
+          if (p.tags && p.tags.length > 0) {
+             tagsContainer.innerHTML = p.tags.map(tag => `
+                <span class="text-[8px] tracking-[0.3em] uppercase px-3 py-1 border border-white/5 text-white/20 hover:text-white/40 transition-colors">#${tag}</span>
+             `).join('');
+          } else {
+             tagsContainer.innerHTML = '';
+          }
+          
+          // Image Thumbnails
+          const thumbContainer = document.getElementById('image-thumbnails');
+          thumbContainer.innerHTML = p.images.map(img => `
+             <button onclick="document.getElementById('main-image').src='${img}'" class="aspect-[4/5] bg-white/5 border border-white/10 hover:border-white transition-all overflow-hidden group">
+                <img src="${img}" class="w-full h-full object-cover transition-all opacity-60 hover:opacity-100" />
+             </button>
+          `).join('');
+
+          // Size Selection
+          const sizeOptions = document.getElementById('size-options');
+          sizeOptions.innerHTML = p.sizes.map(size => `
+             <button onclick="ProductDetail.selectSize('${size}', this)" class="size-btn px-6 py-4 border border-white/10 text-[10px] tracking-[0.4em] uppercase hover:border-white transition-all">
+                ${size}
+             </button>
+          `).join('');
+
+          // Color Selection
+          const colorOptions = document.getElementById('color-options');
+          colorOptions.innerHTML = p.colors.map(color => `
+             <button onclick="ProductDetail.selectColor('${color}', this)" class="color-btn flex items-center gap-4 px-6 py-4 border border-white/10 text-[10px] tracking-[0.4em] uppercase hover:border-white transition-all">
+              <span class="w-4 h-4 border border-white/20" style="background-color: ${this.getColorStyle(color)}"></span>
+                ${color}
+             </button>
+          `).join('');
+
+          // JSON-LD Product Schema for SEO
+          const schema = {
+             "@context": "https://schema.org/",
+             "@type": "Product",
+             "name": p.name,
+             "image": p.images,
+             "description": p.description,
+             "brand": {
+                "@type": "Brand",
+                "name": "THREE CROWN WEAR"
+             },
+             "offers": {
+                "@type": "Offer",
+                "priceCurrency": "USD",
+                "price": p.price,
+                "itemCondition": "https://schema.org/NewCondition",
+                "availability": p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                "url": window.location.href
+             },
+             "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": p.rating || 4.8,
+                "reviewCount": p.reviewCount || 12
+             }
+          };
+
+          // Dynamic Reviews
+          this.renderReviews(p);
+          this.renderRelated(p);
+          this.renderDetails(p);
+
+          const script = document.createElement('script');
+          script.type = 'application/ld+json';
+          script.text = JSON.stringify(schema);
+          document.head.appendChild(script);
+          lucide.createIcons();
+       },
+
+       renderDetails(p) {
+          const highlights = document.getElementById('p-highlights');
+          const shipping = document.getElementById('p-shipping');
+          const refunds = document.getElementById('p-refunds');
+
+          highlights.innerHTML = (p.highlights || ['Premium Craftsmanship', 'Exclusive Design', 'Limited Distribution']).map(h => `<li>${h}</li>`).join('');
+          shipping.textContent = p.shippingInfo || 'Archival shipping handled globally. Expected delivery within 7-14 business days via sovereign courier.';
+          refunds.textContent = p.refundPolicy || '14-day archival return policy. Items must be in original condition with all sovereign tags attached.';
+       },
+
+       renderReviews(p) {
+          const container = document.getElementById('reviews-container');
+          const stars = document.getElementById('p-rating-stars');
+          const text = document.getElementById('p-rating-text');
+          
+          // Load stored reviews for this product
+          const allReviews = JSON.parse(localStorage.getItem('tcw_reviews') || '[]');
+          const productReviews = allReviews.filter(r => r.productId === p.id);
+          
+          // Calculate rating
+          const totalRating = productReviews.reduce((sum, r) => sum + r.rating, 0) + (p.rating || 4.8) * (p.reviewCount || 12);
+          const totalCount = productReviews.length + (p.reviewCount || 12);
+          const avgRating = totalCount > 0 ? (totalRating / totalCount).toFixed(1) : p.rating || 4.8;
+
+          stars.innerHTML = Array(5).fill(0).map((_, i) => `<i data-lucide="star" class="w-3 h-3 ${i < Math.floor(avgRating) ? 'fill-white' : 'text-white/20'}"></i>`).join('');
+          text.textContent = `Average Rating: ${avgRating} (${totalCount} Testimonials)`;
+
+          // Combine stored reviews with dummy reviews
+          const dummyReviews = [
+             { user: 'S. Knight', rating: 5, comment: 'Exceptional craftsmanship. The monochrome aesthetic is perfectly executed.', date: '2024-01-15' },
+             { user: 'E. Sovereign', rating: 5, comment: 'The material quality is beyond expectations. Truly a crown-grade artifact.', date: '2024-01-10' },
+             { user: 'M. Royal', rating: 4, comment: 'Minimalism at its finest. Fits perfectly within my high-end collection.', date: '2024-01-05' }
+          ];
+
+          const storedReviewItems = productReviews.map(r => ({
+             user: r.reviewerName,
+             rating: r.rating,
+             comment: r.reviewText,
+             date: r.date,
+             isStored: true
+          }));
+
+          const allReviewItems = [...storedReviewItems, ...dummyReviews];
+
+          container.innerHTML = allReviewItems.map(r => `
+             <div class="glass-panel p-8 border-white/5 animate-fade-in ${r.isStored ? 'border-l-2 border-l-white/30' : ''}">
+                <div class="flex gap-1 mb-4">
+                   ${Array(5).fill(0).map((_, i) => `<i data-lucide="star" class="w-2 h-2 ${i < r.rating ? 'fill-white' : 'text-white/10'}"></i>`).join('')}
+                </div>
+                <p class="text-[10px] tracking-[0.2em] uppercase text-white/60 mb-6 italic">"${r.comment}"</p>
+                <div class="flex justify-between items-center">
+                   <span class="text-[8px] tracking-[0.4em] uppercase text-white/20">— ${r.user}</span>
+                   ${r.isStored ? '<span class="text-[7px] tracking-[0.3em] uppercase text-white/30">Verified</span>' : ''}
+                </div>
+             </div>
+          `).join('');
+       },
+
+       initReviewForm() {
+          // Star rating selection
+          const starBtns = document.querySelectorAll('.star-btn');
+          const ratingInput = document.getElementById('rating-value');
+          let selectedRating = 0;
+
+          starBtns.forEach(btn => {
+             btn.addEventListener('click', () => {
+                selectedRating = parseInt(btn.dataset.rating);
+                ratingInput.value = selectedRating;
+                starBtns.forEach((b, i) => {
+                   const icon = b.querySelector('i');
+                   if (i < selectedRating) {
+                      icon.classList.add('fill-white');
+                      b.classList.remove('text-white/20');
+                      b.classList.add('text-white');
+                   } else {
+                      icon.classList.remove('fill-white');
+                      b.classList.add('text-white/20');
+                      b.classList.remove('text-white');
+                   }
+                });
+             });
+          });
+
+          // Form submission
+          const form = document.getElementById('review-form');
+          if (form) {
+             form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (!selectedRating) {
+                   ThreeCrown.showToast('Please select a rating', 'error');
+                   return;
+                }
+
+                const formData = new FormData(form);
+                const review = {
+                   id: Date.now().toString(),
+                   productId: this.currentProduct.id,
+                   reviewerName: formData.get('reviewerName'),
+                   rating: selectedRating,
+                   reviewText: formData.get('reviewText'),
+                   date: new Date().toISOString().split('T')[0]
+                };
+
+                // Save to localStorage
+                const allReviews = JSON.parse(localStorage.getItem('tcw_reviews') || '[]');
+                allReviews.push(review);
+                localStorage.setItem('tcw_reviews', JSON.stringify(allReviews));
+
+                // Show success and reset
+                ThreeCrown.showToast('Thank you for your testimonial', 'success');
+                form.reset();
+                selectedRating = 0;
+                starBtns.forEach(b => {
+                   b.querySelector('i').classList.remove('fill-white');
+                   b.classList.add('text-white/20');
+                   b.classList.remove('text-white');
+                });
+                ratingInput.value = '';
+
+                // Refresh reviews display
+                this.renderReviews(this.currentProduct);
+                lucide.createIcons();
+             });
+          }
+       },
+
+       renderRelated(p) {
+          const grid = document.getElementById('related-grid');
+          const related = this.products.filter(x => x.id !== p.id && x.category === p.category).slice(0, 4);
+          
+          if (related.length === 0) {
+             document.getElementById('related-grid').parentElement.classList.add('hidden');
+             return;
+          }
+
+          grid.innerHTML = related.map(r => `
+             <div class="group">
+                <a href="product.html?id=${r.id}" class="block aspect-[4/5] bg-white/5 border border-white/5 overflow-hidden mb-6">
+                   <img src="${r.images[0]}" class="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" alt="${r.name}">
+                </a>
+                <h4 class="text-[10px] tracking-[0.3em] uppercase mb-2">${r.name}</h4>
+                <span class="text-[10px] tracking-[0.2em] uppercase text-white/40">$${r.price.toFixed(2)}</span>
+             </div>
+          `).join('');
+       },
+
+       toggleAccordion(id) {
+          const content = document.getElementById(`${id}-content`);
+          const icon = document.getElementById(`${id}-icon`);
+          const isHidden = content.classList.contains('hidden');
+
+          // Close all
+          ['specs', 'shipping', 'refunds'].forEach(key => {
+             document.getElementById(`${key}-content`).classList.add('hidden');
+             document.getElementById(`${key}-icon`).style.transform = 'rotate(0deg)';
+          });
+
+          if (isHidden) {
+             content.classList.remove('hidden');
+             icon.style.transform = 'rotate(45deg)';
+             gsap.from(content, { height: 0, opacity: 0, duration: 0.5, ease: 'power2.out' });
+          }
+       },
+
+       getColorStyle(name) {
+          const map = {
+             'Pure White': '#FFFFFF',
+             'Pure Black': '#000000',
+             'White': '#FFFFFF',
+             'Black': '#000000'
+          };
+          return map[name] || '#666666';
+       },
+
+       selectSize(size, el) {
+          this.selectedSize = size;
+          document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('bg-white', 'text-black', 'border-white'));
+          el.classList.add('bg-white', 'text-black', 'border-white');
+       },
+
+       selectColor(color, el) {
+          this.selectedColor = color;
+          document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('bg-white', 'text-black', 'border-white'));
+          el.classList.add('bg-white', 'text-black', 'border-white');
+       },
+
+       addToCart() {
+          if (!this.selectedSize || !this.selectedColor) {
+             ThreeCrown.showToast('Please select size and color', 'error');
+             return;
+          }
+
+          const cartItem = {
+             productId: this.currentProduct.id,
+             size: this.selectedSize,
+             color: this.selectedColor,
+             quantity: 1
+          };
+
+          ThreeCrown.cart.push(cartItem);
+          ThreeCrown.saveCart();
+          ThreeCrown.updateCartCount();
+          ThreeCrown.showToast('Success - Entry made in the Kingdom.', 'success');
+          ThreeCrown.toggleCart(true);
+       }
+    };
+
+     document.addEventListener('DOMContentLoaded', () => {
+        ProductDetail.init();
+        
+        // Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.to('.newsletter-reveal', {
+           scrollTrigger: {
+              trigger: '.newsletter-reveal',
+              start: 'top 90%',
+           },
+           opacity: 1,
+           y: 0,
+           stagger: 0.2,
+           duration: 1.5,
+           ease: 'power3.out'
+        });
+     });
+  </script>
+</body>
+</html>

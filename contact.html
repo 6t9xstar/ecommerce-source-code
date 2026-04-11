@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | THREE CROWN WEAR</title>
+  
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; font-src 'self' https: data:;">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-pure-black text-pure-white selection:bg-pure-white selection:text-pure-black">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-pure-black/80 backdrop-blur-md border-b border-white/5 py-6 px-6 md:px-12">
+    <div class="max-w-[1800px] mx-auto flex items-center justify-between">
+      <a href="index.html" class="font-display text-xl tracking-[0.3em] font-medium">
+        THREE CROWN WEAR
+      </a>
+      
+      <div class="hidden lg:flex items-center gap-16">
+        <a href="shop.html" class="nav-link">Collections</a>
+        <a href="about.html" class="nav-link">Kingdom</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-8">
+        <button id="search-trigger" class="hover:opacity-60 transition-opacity">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </button>
+        <button id="cart-btn" class="relative hover:opacity-60 transition-opacity">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cart-count" class="absolute -top-2 -right-2 w-4 h-4 bg-pure-white text-pure-black text-[10px] rounded-full flex items-center justify-center hidden">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="pt-48 pb-12 px-6 md:px-12 container mx-auto text-center">
+     <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Reach the Sovereign</span>
+     <h1 class="font-display text-5xl md:text-8xl uppercase leading-none mb-12">Contact</h1>
+  </header>
+
+  <!-- Contact Grid -->
+  <section class="pb-32 px-6 md:px-12 container mx-auto">
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start max-w-7xl mx-auto">
+        
+        <!-- Contact Info -->
+        <div class="space-y-48">
+           <div class="space-y-24">
+              <div>
+                 <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-8">Digital Artifacts</h4>
+                 <a href="mailto:threecrownwear@gmail.com" class="font-display text-2xl md:text-4xl hover:opacity-60 transition-all">threecrownwear@gmail.com</a>
+              </div>
+              
+              <div>
+                 <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-8">Direct Voice</h4>
+                 <a href="tel:+923440455505" class="font-display text-2xl md:text-4xl hover:opacity-60 transition-all">+92 344 0455505</a>
+              </div>
+
+              <div>
+                 <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-8">Follow</h4>
+                 <div class="flex gap-12">
+                    <a href="#" class="hover:opacity-60 transition-all"><i data-lucide="instagram" class="w-8 h-8"></i></a>
+                    <a href="#" class="hover:opacity-60 transition-all"><i data-lucide="twitter" class="w-8 h-8"></i></a>
+                    <a href="#" class="hover:opacity-60 transition-all"><i data-lucide="facebook" class="w-8 h-8"></i></a>
+                 </div>
+              </div>
+           </div>
+
+           <div class="bg-white/5 border border-white/10 p-12 space-y-12">
+              <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60">Business Hours</h4>
+              <div class="space-y-6 text-xs tracking-[0.3em] uppercase">
+                 <div class="flex justify-between"><span>Mon - Fri</span><span>09:00 - 18:00</span></div>
+                 <div class="flex justify-between"><span>Sat</span><span>10:00 - 16:00</span></div>
+                 <div class="flex justify-between text-white/20"><span>Sun</span><span>Closed</span></div>
+              </div>
+           </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-white/5 p-12 md:p-24 border border-white/10 relative">
+           <div class="absolute -top-[1px] -left-[1px] w-12 h-[1px] bg-white"></div>
+           <div class="absolute -top-[1px] -left-[1px] w-[1px] h-12 bg-white"></div>
+           
+           <h3 class="font-display text-3xl mb-12 uppercase tracking-[0.1em]">Send Message</h3>
+           
+           <!-- Web3Forms Integration -->
+           <form action="https://api.web3forms.com/submit" method="POST" class="space-y-12">
+              <input type="hidden" name="access_key" value="0f2c6c7a-2483-4172-aa7e-23fedd85f5ec">
+              
+              <!-- Honeypot for Security -->
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+              <div>
+                 <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Identity</label>
+                 <input type="text" name="name" required placeholder="Your Name" class="input-premium">
+              </div>
+
+              <div>
+                 <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Digital Address</label>
+                 <input type="email" name="email" required placeholder="name@domain.com" class="input-premium">
+              </div>
+
+              <div>
+                 <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Message Artifact</label>
+                 <textarea name="message" required placeholder="How can we assist you?" class="input-premium min-h-[150px]"></textarea>
+              </div>
+
+              <div class="pt-12">
+                 <button type="submit" class="btn-primary w-full shadow-2xl">Transmit Message</button>
+              </div>
+           </form>
+        </div>
+
+     </div>
+  </section>
+
+  <!-- Global Districts -->
+  <section class="section-padding bg-pure-black border-t border-white/5 relative overflow-hidden">
+     <div class="container mx-auto px-6">
+        <div class="mb-24">
+           <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Regional Protocols</span>
+           <h2 class="font-display text-4xl md:text-6xl uppercase tracking-[0.1em]">Global Districts</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+           <div class="district-card p-12 bg-white/5 border border-white/5 opacity-0 translate-y-12 transition-all hover:border-white/20">
+              <h3 class="font-display text-xl mb-6 uppercase">Americas Hub</h3>
+              <p class="text-[9px] tracking-[0.3em] uppercase text-white/40 mb-8">Express archival shipping across North and South America. Priority sovereign clearance.</p>
+              <span class="text-[8px] tracking-[0.5em] uppercase text-white/20">EDT Support: 09:00 - 18:00</span>
+           </div>
+           <div class="district-card p-12 bg-white/5 border border-white/5 opacity-0 translate-y-12 transition-all hover:border-white/20">
+              <h3 class="font-display text-xl mb-6 uppercase">EMEA Central</h3>
+              <p class="text-[9px] tracking-[0.3em] uppercase text-white/40 mb-8">Direct logistics from our London and Dubai distribution archives. Global reach verified.</p>
+              <span class="text-[8px] tracking-[0.5em] uppercase text-white/20">GMT Support: 09:00 - 18:00</span>
+           </div>
+           <div class="district-card p-12 bg-white/5 border border-white/5 opacity-0 translate-y-12 transition-all hover:border-white/20">
+              <h3 class="font-display text-xl mb-6 uppercase">APAC Sector</h3>
+              <p class="text-[9px] tracking-[0.3em] uppercase text-white/40 mb-8">Specialized archival handling for the Asia-Pacific sovereign regions. Secure transit.</p>
+              <span class="text-[8px] tracking-[0.5em] uppercase text-white/20">HKT Support: 09:00 - 18:00</span>
+           </div>
+        </div>
+     </div>
+  </section>
+
+  <!-- Sovereign Inquiries (FAQ) -->
+  <section class="section-padding bg-pure-black border-t border-white/5">
+     <div class="container mx-auto px-6 max-w-4xl">
+        <div class="text-center mb-24">
+           <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Frequently Requested</span>
+           <h2 class="font-display text-4xl md:text-6xl uppercase tracking-[0.1em]">Sovereign Inquiries</h2>
+        </div>
+        <div class="space-y-4">
+           <div class="faq-item border-b border-white/5 pb-4">
+              <button onclick="Contact.toggleFAQ('returns')" class="w-full flex justify-between items-center py-6 text-[10px] tracking-[0.4em] uppercase hover:text-white/60 transition-all text-left">
+                 Archival Return Protocol
+                 <i data-lucide="plus" id="returns-icon" class="w-3 h-3 transition-transform"></i>
+              </button>
+              <div id="returns-content" class="hidden pb-12">
+                 <p class="text-[10px] tracking-[0.2em] uppercase text-white/40 leading-relaxed">We offer a 14-day sovereign return window. Artifacts must be in original condition with all kingdom tags attached for a successful reversal.</p>
+              </div>
+           </div>
+           <div class="faq-item border-b border-white/5 pb-4">
+              <button onclick="Contact.toggleFAQ('shipping')" class="w-full flex justify-between items-center py-6 text-[10px] tracking-[0.4em] uppercase hover:text-white/60 transition-all text-left">
+                 Global Shipping Logistics
+                 <i data-lucide="plus" id="shipping-icon" class="w-3 h-3 transition-transform"></i>
+              </button>
+              <div id="shipping-content" class="hidden pb-12">
+                 <p class="text-[10px] tracking-[0.2em] uppercase text-white/40 leading-relaxed">All artifacts are shipped via secure monarchal couriers. Standard delivery within 7-14 business days globally from the archive.</p>
+              </div>
+           </div>
+           <div class="faq-item border-b border-white/5 pb-4">
+              <button onclick="Contact.toggleFAQ('sizing')" class="w-full flex justify-between items-center py-6 text-[10px] tracking-[0.4em] uppercase hover:text-white/60 transition-all text-left">
+                 Sovereign Sizing Guide
+                 <i data-lucide="plus" id="sizing-icon" class="w-3 h-3 transition-transform"></i>
+              </button>
+              <div id="sizing-content" class="hidden pb-12">
+                 <p class="text-[10px] tracking-[0.2em] uppercase text-white/40 leading-relaxed">Our garments are engineered for a monarchal fit. We recommend your standard size for a tailored presence or sizing up for a relaxed domain.</p>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+
+  <!-- Imperial Newsletter -->
+  <section class="py-32 bg-pure-black border-t border-white/5 relative">
+     <div class="container mx-auto px-6 max-w-4xl text-center">
+        <h2 class="font-display text-3xl md:text-5xl tracking-[0.1em] uppercase mb-12 newsletter-reveal opacity-0">Enter THE ARCHIVE</h2>
+        <p class="text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16 newsletter-reveal opacity-0">Signatories receive early access to seasonal artifacts and royal drops.</p>
+        <form onsubmit="event.preventDefault(); ThreeCrown.showToast('PROTOCOL ACCEPTED. WELCOME TO THE KINGDOM.', 'success'); this.reset();" class="flex flex-col md:flex-row gap-6 justify-center items-center newsletter-reveal opacity-0">
+           <input type="email" placeholder="YOUR REGISTRY EMAIL" required class="bg-transparent border-b border-white/20 py-4 px-6 text-xs tracking-[0.3em] uppercase focus:outline-none focus:border-white transition-all w-full md:w-96 text-center">
+           <button type="submit" class="btn-primary py-4 px-12 text-xs">Authorize</button>
+        </form>
+     </div>
+  </section>
+
+  <!-- Advanced Footer -->
+  <footer class="bg-pure-black border-t border-white/5 py-32 px-6 md:px-12">
+    <div class="max-w-[1800px] mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-24 lg:gap-12 mb-32">
+        <div class="lg:col-span-1">
+          <h3 class="font-display text-xl tracking-[0.3em] mb-8 uppercase">THREE CROWN WEAR</h3>
+          <p class="text-white/40 text-xs tracking-widest uppercase leading-loose">
+            High performance monochrome aesthetics. <br>
+            Established 2024. <br>
+            The Kingdom Awaits.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Collections</h4>
+          <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+            <li><a href="shop.html?category=clothing" class="hover:text-white/60 transition-colors">Clothing</a></li>
+            <li><a href="shop.html?category=accessories" class="hover:text-white/60 transition-colors">Accessories</a></li>
+            <li><a href="shop.html?category=footwear" class="hover:text-white/60 transition-colors">Footwear</a></li>
+            <li><a href="shop.html?category=premium" class="hover:text-white/60 transition-colors">Crown Royal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Support</h4>
+          <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+            <li><a href="contact.html" class="hover:text-white/60 transition-colors">Contact Us</a></li>
+            <li><a href="about.html" class="hover:text-white/60 transition-colors">Our Story</a></li>
+            <li><a href="admin/index.html" class="hover:text-white/60 transition-colors">Admin Portal</a></li>
+            <li><a href="#" class="hover:text-white/60 transition-colors">Shipping & Returns</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Follow</h4>
+          <div class="flex gap-8">
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+          </div>
+          <div class="mt-12">
+             <p class="text-xs tracking-[0.4em] uppercase text-white/40">threecrownwear@gmail.com</p>
+             <p class="text-xs tracking-[0.4em] uppercase text-white/40 mt-2">+92 344 0455505</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-12">
+        <p class="text-[10px] tracking-[0.4em] uppercase text-white/20">&copy; 2024 THREE CROWN WEAR. All Rights Reserved.</p>
+        <div class="flex gap-12 mt-6 md:mt-0">
+           <a href="privacy.html" class="text-[10px] tracking-[0.4em] uppercase text-white/20 hover:text-white transition-colors">Privacy</a>
+           <a href="terms.html" class="text-[10px] tracking-[0.4em] uppercase text-white/20 hover:text-white transition-colors">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Drawer/Overlay (for consistency) -->
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-pure-black border-l border-white/10 z-[110] translate-x-full transition-transform duration-700 ease-out">
+     <div class="flex flex-col h-full p-12">
+        <div class="flex items-center justify-between mb-16">
+           <h3 class="font-display text-2xl tracking-[0.2em] uppercase">Cart</h3>
+           <button id="close-cart" class="text-white/60 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto"></div>
+        <div class="mt-12 border-t border-white/5 pt-12">
+           <div class="flex justify-between items-center mb-12">
+              <span class="text-[10px] tracking-[0.5em] uppercase text-white/40">Subtotal</span>
+              <span id="cart-total" class="font-display text-2xl">$0.00</span>
+           </div>
+           <a href="checkout.html" id="checkout-btn" class="btn-primary w-full block text-center">Proceed to Checkout</a>
+        </div>
+     </div>
+  </div>
+  <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[105] hidden"></div>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-[100] bg-pure-black h-screen w-full hidden opacity-0">
+     <div class="flex flex-col items-center justify-center h-full px-6">
+        <button id="close-search" class="absolute top-12 right-12 text-white/60 hover:text-white transition-colors">
+           <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <div class="w-full max-w-4xl text-center">
+           <input type="text" id="search-input" placeholder="Search the Kingdom..." class="w-full bg-transparent border-b border-white/10 py-8 text-4xl md:text-7xl font-display text-center focus:outline-none focus:border-white transition-colors placeholder:text-white/10 uppercase">
+           <div id="search-results" class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left"></div>
+        </div>
+     </div>
+  </div>
+
+   <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-12 right-12 z-[200] flex flex-col gap-4"></div>
+
+  <script src="js/main.js"></script>
+   <script>
+      const Contact = {
+         toggleFAQ(id) {
+            const content = document.getElementById(`${id}-content`);
+            const icon = document.getElementById(`${id}-icon`);
+            const isHidden = content.classList.contains('hidden');
+
+            ['returns', 'shipping', 'sizing'].forEach(key => {
+               document.getElementById(`${key}-content`).classList.add('hidden');
+               document.getElementById(`${key}-icon`).style.transform = 'rotate(0deg)';
+            });
+
+            if (isHidden) {
+               content.classList.remove('hidden');
+               icon.style.transform = 'rotate(45deg)';
+               gsap.from(content, { height: 0, opacity: 0, duration: 0.5, ease: 'power2.out' });
+            }
+         }
+      };
+
+      window.addEventListener('load', () => {
+         gsap.registerPlugin(ScrollTrigger);
+
+         gsap.to('.district-card', {
+            scrollTrigger: { trigger: '.district-card', start: 'top 85%' },
+            opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power3.out'
+         });
+
+         gsap.to('.newsletter-reveal', {
+            scrollTrigger: { trigger: '.newsletter-reveal', start: 'top 90%' },
+            opacity: 1, y: 0, stagger: 0.2, duration: 1.5, ease: 'power3.out'
+         });
+      });
+   </script>
+</body>
+</html>

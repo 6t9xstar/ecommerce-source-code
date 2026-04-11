@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Collections | THREE CROWN WEAR Admin</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    :root {
+      --admin-bg: #000000;
+      --admin-text: #FFFFFF;
+      --admin-border: rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body class="bg-pure-black text-pure-white selection:bg-pure-white selection:text-pure-black min-h-screen">
+
+  <div class="flex h-screen overflow-hidden">
+     <!-- Sidebar -->
+     <aside class="w-80 border-r border-white/5 bg-pure-black hidden lg:flex flex-col p-12">
+        <div class="mb-24">
+           <h2 class="font-display text-xl tracking-[0.3em] uppercase">THREE CROWN</h2>
+           <span class="text-[9px] tracking-[0.4em] uppercase text-white/20">Archive Registry</span>
+        </div>
+        <nav class="flex-1 space-y-12">
+           <div>
+              <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">Registry</h4>
+              <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+                 <li><a href="dashboard.html" class="text-white/40 hover:text-white transition-all">Dashboard</a></li>
+                 <li><a href="products.html" class="text-white/40 hover:text-white transition-all">Artifacts</a></li>
+                 <li><a href="categories.html" class="text-white underline">Collections</a></li>
+              </ul>
+           </div>
+
+           <div>
+              <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">Navigation</h4>
+              <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+                 <li><a href="../index.html" class="text-white/40 hover:text-white transition-all flex items-center gap-2">&larr; Return to Kingdom</a></li>
+              </ul>
+           </div>
+
+           <div>
+              <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">Security</h4>
+              <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+                 <li><a href="#" onclick="logout()" class="text-white/40 hover:text-red-500 transition-all">Terminal Exit</a></li>
+              </ul>
+           </div>
+        </nav>
+     </aside>
+
+     <!-- Main Content -->
+     <main class="flex-1 overflow-y-auto px-6 md:px-24 py-24 bg-pure-black">
+        <header class="flex justify-between items-end mb-24">
+           <div>
+              <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Hierarchy Protocol</span>
+              <h1 class="font-display text-4xl md:text-6xl uppercase tracking-[0.1em]">Manage Collections</h1>
+           </div>
+           <button onclick="openModal()" class="btn-primary py-3 px-8 text-xs">New Collection Node</button>
+        </header>
+
+        <!-- Category Grid -->
+        <div id="categories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+           <!-- Dynamic content -->
+           <p class="text-white/20 text-center py-24 text-xs tracking-[0.4em] uppercase">No collections detected.</p>
+        </div>
+     </main>
+  </div>
+
+  <!-- Category Modal -->
+  <div id="category-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-3xl flex items-center justify-center p-6 hidden">
+     <div class="w-full max-w-2xl glass-panel border-white/10 p-12">
+        <div class="flex justify-between items-center mb-16 pb-8 border-b border-white/10">
+           <h3 id="modal-title" class="font-display text-2xl uppercase tracking-[0.2em]">New Collection Node</h3>
+           <button onclick="closeModal()" class="text-white/20 hover:text-white transition-all"><i data-lucide="x" class="w-8 h-8"></i></button>
+        </div>
+
+        <form id="category-form" class="space-y-12">
+           <div>
+              <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Collection Name</label>
+              <input type="text" name="name" required placeholder="THE CROWN ROYALE" class="input-premium">
+           </div>
+           <div>
+              <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Description</label>
+              <textarea name="description" required placeholder="The essence of this collection node..." class="input-premium min-h-[100px]"></textarea>
+           </div>
+           <div>
+              <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Visual URL</label>
+              <input type="text" name="imageUrl" required placeholder="https://image.jpg" class="input-premium">
+           </div>
+
+           <div class="pt-12 border-t border-white/10 flex gap-6">
+              <button type="submit" class="btn-primary flex-1">Apply Entry</button>
+              <button type="button" onclick="closeModal()" class="btn-secondary flex-1">Abort</button>
+           </div>
+        </form>
+     </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    if (localStorage.getItem('tcw_admin') !== 'true') window.location.href = 'index.html';
+
+    const CategoryStore = {
+       categories: JSON.parse(localStorage.getItem('tcw_categories') || '[]'),
+       editingId: null,
+
+       init() {
+          this.render();
+          lucide.createIcons();
+       },
+
+       render() {
+          const container = document.getElementById('categories-grid');
+          if (this.categories.length === 0) {
+             container.innerHTML = '<p class="text-white/20 text-center py-24 text-xs tracking-[0.4em] uppercase">No collections detected.</p>';
+             return;
+          }
+
+          container.innerHTML = this.categories.map(c => `
+             <div class="glass-panel border-white/5 overflow-hidden group">
+                <div class="aspect-video relative overflow-hidden">
+                   <img src="${c.imageUrl}" class="w-full h-full object-cover transition-all duration-1000" alt="">
+                </div>
+                 <div class="p-8">
+                    <h3 class="font-display text-xl uppercase tracking-[0.1em] mb-4">${sanitizeHTML(c.name)}</h3>
+                    <p class="text-[10px] tracking-[0.3em] uppercase text-white/40 leading-relax mb-8 line-clamp-3 overflow-hidden" title="${sanitizeHTML(c.description)}">${sanitizeHTML(c.description)}</p>
+                    <div class="flex flex-wrap gap-8">
+                       <a href="../shop.html?category=${encodeURIComponent(c.name.toLowerCase())}" target="_blank" class="text-[10px] tracking-[0.4em] uppercase border-b border-white/5 hover:border-white transition-all pb-1 flex items-center gap-2 font-semibold">View in Shop <i data-lucide="external-link" class="w-3 h-3"></i></a>
+                       <div class="flex gap-4 ml-auto">
+                          <button onclick="CategoryStore.edit('${c.id}')" class="text-white/40 hover:text-white transition-all"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                          <button onclick="CategoryStore.deletePrompt('${c.id}')" class="text-white/40 hover:text-red-500 transition-all"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                       </div>
+                    </div>
+                 </div>
+             </div>
+          `).join('');
+          lucide.createIcons();
+       },
+
+       edit(id) {
+          const c = this.categories.find(x => x.id === id);
+          if (!c) return;
+          this.editingId = id;
+          
+          const form = document.getElementById('category-form');
+          form.name.value = c.name;
+          form.description.value = c.description;
+          form.imageUrl.value = c.imageUrl;
+
+          document.getElementById('modal-title').textContent = 'Modify Collection Node';
+          openModal();
+       },
+
+       deletePrompt(id) {
+          if (confirm('Permanently erase this collection node?')) {
+             this.categories = this.categories.filter(x => x.id !== id);
+             localStorage.setItem('tcw_categories', JSON.stringify(this.categories));
+             this.render();
+             ThreeCrown.showToast('Node Erased.', 'success');
+          }
+       }
+    };
+
+    function openModal() { document.getElementById('category-modal').classList.remove('hidden'); }
+    function closeModal() { 
+       document.getElementById('category-modal').classList.add('hidden'); 
+       document.getElementById('category-form').reset();
+       CategoryStore.editingId = null;
+    }
+
+    document.getElementById('category-form').addEventListener('submit', (e) => {
+       e.preventDefault();
+       const fd = new FormData(e.target);
+       
+       const cat = {
+          id: CategoryStore.editingId || Date.now().toString(),
+          name: fd.get('name'),
+          description: fd.get('description'),
+          imageUrl: fd.get('imageUrl'),
+          updatedAt: new Date().toISOString()
+       };
+
+       if (CategoryStore.editingId) {
+          const idx = CategoryStore.categories.findIndex(x => x.id === cat.id);
+          CategoryStore.categories[idx] = cat;
+       } else {
+          CategoryStore.categories.push(cat);
+       }
+
+        localStorage.setItem('tcw_categories', JSON.stringify(CategoryStore.categories));
+        CategoryStore.render();
+        closeModal();
+        ThreeCrown.showToast('Registry Updated.', 'success');
+     });
+
+     function logout() { localStorage.removeItem('tcw_admin'); window.location.href = '../index.html'; }
+   </script>
+
+   <!-- Mobile Nav Trigger -->
+   <button id="mobile-menu-trigger" class="lg:hidden fixed bottom-12 right-12 bg-white text-black w-12 h-12 rounded-full flex items-center justify-center z-50">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+   </button>
+
+   <!-- Toast Container -->
+   <div id="toast-container" class="fixed bottom-12 right-12 z-[100] flex flex-col gap-4"></div>
+
+   <script src="../js/main.js"></script>
+   <script>
+     // Authentication Check
+     if (localStorage.getItem('tcw_admin') !== 'true') {
+        window.location.href = 'index.html';
+     }
+
+     document.addEventListener('DOMContentLoaded', () => {
+        CategoryStore.init();
+
+        // Mobile Menu Toggle
+        const trigger = document.getElementById('mobile-menu-trigger');
+        const aside = document.querySelector('aside');
+        if (trigger && aside) {
+           trigger.addEventListener('click', () => {
+              aside.classList.toggle('hidden');
+              aside.classList.toggle('fixed');
+              aside.classList.toggle('inset-0');
+              aside.classList.toggle('z-[60]');
+           });
+        }
+     });
+   </script>
+ </body>
+ </html>

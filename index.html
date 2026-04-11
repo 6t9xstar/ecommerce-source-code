@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THREE CROWN WEAR | The Sovereign Collection</title>
+  <meta name="description" content="THREE CROWN WEAR - The pinnacle of luxury monochrome apparel. Premium shirts, accessories, and footwear for the modern kingdom.">
+  
+  <!-- Cybersecurity Headers & CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; font-src 'self' https: data:;">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- SEO / Open Graph -->
+  <meta property="og:title" content="THREE CROWN WEAR | The Sovereign Collection">
+  <meta property="og:description" content="Experience the zenith of monochrome luxury. Craftsmanship redefined.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://threecrownwear.com">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "THREE CROWN WEAR",
+    "url": "https://threecrownwear.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://threecrownwear.com/shop.html?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "THREE CROWN WEAR",
+    "url": "https://threecrownwear.com",
+    "logo": "https://threecrownwear.com/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+923440455505",
+      "contactType": "customer service",
+      "email": "threecrownwear@gmail.com"
+    }
+  }
+  </script>
+
+  <!-- Fonts & Core Assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- SEO & Strategic Ranking Meta Tags -->
+  <meta name="description" content="THREE CROWN WEAR: Premium Luxury Monochrome Fashion. Shop the exclusive archive of hand-crafted shirts, accessories, and royal-grade footwear. The modern sovereign's wardrobe.">
+  <meta name="keywords" content="Luxury Fashion, Monochrome Apparel, Premium Streetwear, Three Crown Wear, High-End Accessories, Designer T-Shirts, Royal Grade Clothing">
+  <meta property="og:title" content="THREE CROWN WEAR | The Sovereign Archive">
+  <meta property="og:description" content="Hand-crafted monarchal excellence. Explore the definitive collection of black and white luxury fashion.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://threecrownwear.com/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+  <script>
+    // Custom tailwind config injection for runtime if needed (already in tailwind.config.js for build)
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'pure-black': '#000000',
+            'pure-white': '#FFFFFF',
+            'crown-glass': 'rgba(255, 255, 255, 0.03)',
+            'crown-border': 'rgba(255, 255, 255, 0.1)',
+            'crown-muted': 'rgba(255, 255, 255, 0.4)',
+          },
+          fontFamily: {
+            'display': ['Playfair Display', 'serif'],
+            'body': ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-pure-black text-pure-white selection:bg-pure-white selection:text-pure-black">
+
+  <!-- Loading Animation -->
+  <div id="loader" class="fixed inset-0 z-[100] bg-pure-black flex items-center justify-center">
+    <div class="text-center overflow-hidden">
+      <h2 id="loader-title" class="font-display text-2xl tracking-[0.4em] opacity-0 translate-y-full">THREE CROWN WEAR</h2>
+      <div id="loader-bar" class="w-0 h-[1px] bg-pure-white mt-4 mx-auto transition-all duration-1000"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 bg-transparent py-8 px-6 md:px-12 backdrop-blur-md border-b border-white/0">
+    <div class="max-w-[1800px] mx-auto flex items-center justify-between">
+      <a href="index.html" class="font-display text-xl tracking-[0.3em] font-medium hover:opacity-70 transition-opacity">
+        THREE CROWN WEAR
+      </a>
+      
+      <div class="hidden lg:flex items-center gap-16">
+        <a href="shop.html" class="nav-link">Collections</a>
+        <a href="about.html" class="nav-link">Kingdom</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-8">
+        <button id="search-trigger" class="hover:opacity-60 transition-opacity">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </button>
+        <a href="wishlist.html" class="relative hover:opacity-60 transition-opacity">
+          <i data-lucide="heart" class="w-5 h-5"></i>
+          <span id="wishlist-count" class="absolute -top-2 -right-2 w-4 h-4 bg-red-500 text-pure-white text-[10px] rounded-full flex items-center justify-center hidden">0</span>
+        </a>
+        <button id="cart-btn" class="relative hover:opacity-60 transition-opacity">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cart-count" class="absolute -top-2 -right-2 w-4 h-4 bg-pure-white text-pure-black text-[10px] rounded-full flex items-center justify-center hidden">0</span>
+        </button>
+        <button class="lg:hidden" id="menu-btn">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="relative min-h-screen flex items-center overflow-hidden">
+    <div class="absolute inset-0 bg-monochrome-glow z-0"></div>
+    
+    <div class="container mx-auto px-6 md:px-12 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+        <div class="flex-1 text-center lg:text-left">
+          <div class="inline-block px-4 py-1 border border-white/20 mb-8 opacity-0 translate-y-10 hero-reveal">
+            <span class="text-[10px] tracking-[0.5em] uppercase text-white/60">Est. 2024</span>
+          </div>
+          <h1 class="font-display text-6xl md:text-8xl lg:text-[10rem] leading-[0.9] mb-12 opacity-0 translate-y-20 hero-reveal">
+            WEAR THE <br>
+            <span class="ml-0 lg:ml-24">CROWN.</span>
+          </h1>
+          <p class="text-white/40 max-w-lg mb-12 text-sm md:text-lg tracking-widest uppercase leading-relaxed opacity-0 translate-y-10 hero-reveal">
+            The pinnacle of luxury monochrome apparel. Redefining the standard of elegance.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start opacity-0 translate-y-10 hero-reveal">
+            <a href="shop.html" class="btn-primary">Explore Shop</a>
+            <a href="about.html" class="btn-secondary">The Story</a>
+          </div>
+        </div>
+        
+        <div class="flex-1 w-full relative">
+          <div class="aspect-[4/5] bg-white/5 border border-white/10 overflow-hidden relative opacity-0 scale-95 hero-image-reveal">
+             <!-- Placeholder for Hero Image - Luxury Fashion Shot -->
+             <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=800" 
+                  class="w-full h-full object-cover transition-all duration-1000" 
+                  alt="High Fashion Model">
+          </div>
+          <!-- Decorative Crown element -->
+          <div class="absolute -bottom-10 -left-10 w-40 h-40 border border-white/5 opacity-20 pointer-events-none animate-float"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Collections Section -->
+  <section class="section-padding bg-pure-black border-t border-white/5">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-24">
+        <div>
+           <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-4">Curated Selections</span>
+           <h2 class="font-display text-4xl md:text-6xl uppercase leading-none">The Kingdoms</h2>
+        </div>
+        <a href="shop.html" class="text-xs tracking-[0.4em] uppercase border-b border-white/20 pb-2 hover:border-white transition-all mt-8 md:mt-0">View Entire Catalog</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
+        <!-- Category: Clothing -->
+        <a href="shop.html?category=clothing" class="product-card group bg-white/5 aspect-[3/4]">
+          <img src="https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4" class="product-image w-full h-full object-cover transition-all duration-1000" alt="Clothing">
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+             <h3 class="font-display text-2xl tracking-[0.2em] mb-4">CLOTHING</h3>
+             <span class="text-[10px] tracking-[0.4em] border border-white/40 px-4 py-2">Shop Now</span>
+          </div>
+        </a>
+
+        <!-- Category: Accessories -->
+        <a href="shop.html?category=accessories" class="product-card group bg-white/5 aspect-[3/4]">
+          <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&q=80&w=600" class="product-image w-full h-full object-cover transition-all duration-1000" alt="Accessories">
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+             <h3 class="font-display text-2xl tracking-[0.2em] mb-4">ACCESSORIES</h3>
+             <span class="text-[10px] tracking-[0.4em] border border-white/40 px-4 py-2">Shop Now</span>
+          </div>
+        </a>
+
+        <!-- Category: Footwear -->
+        <a href="shop.html?category=footwear" class="product-card group bg-white/5 aspect-[3/4]">
+          <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=600" class="product-image w-full h-full object-cover transition-all duration-1000" alt="Footwear">
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+             <h3 class="font-display text-2xl tracking-[0.2em] mb-4">FOOTWEAR</h3>
+             <span class="text-[10px] tracking-[0.4em] border border-white/40 px-4 py-2">Shop Now</span>
+          </div>
+        </a>
+
+        <!-- Category: Premium -->
+        <a href="shop.html?category=premium" class="product-card group bg-white/5 aspect-[3/4]">
+          <img src="https://plus.unsplash.com/premium_photo-1695792938592-dd1412915940?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="product-image w-full h-full object-cover transition-all duration-1000" alt="Premium">
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+             <h3 class="font-display text-2xl tracking-[0.2em] mb-4">CROWN ROYAL</h3>
+             <span class="text-[10px] tracking-[0.4em] border border-white/40 px-4 py-2">Limited Edition</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sovereign Attributes (Features) -->
+  <section class="section-padding bg-pure-black border-t border-white/5 relative overflow-hidden">
+     <div class="absolute top-0 right-0 w-64 h-64 bg-white/[0.02] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+     <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-32">
+           <div class="attribute-card opacity-0 translate-y-12">
+              <i data-lucide="cpu" class="w-8 h-8 mb-8 text-white/20"></i>
+              <h3 class="font-display text-xl tracking-[0.2em] mb-6 uppercase">Precise Engineering</h3>
+              <p class="text-[10px] tracking-[0.3em] uppercase text-white/40 leading-[2.5]">Each fiber is selected for architectural integrity and monarchal comfort. Hand-finished in our sovereign workshops.</p>
+           </div>
+           <div class="attribute-card opacity-0 translate-y-12">
+              <i data-lucide="layers" class="w-8 h-8 mb-8 text-white/20"></i>
+              <h3 class="font-display text-xl tracking-[0.2em] mb-6 uppercase">Monarchal Design</h3>
+              <p class="text-[10px] tracking-[0.3em] uppercase text-white/40 leading-[2.5]">A strict black & white palette that rejects the ephemeral, favoring the eternal. Minimalism at its zenith.</p>
+           </div>
+           <div class="attribute-card opacity-0 translate-y-12">
+              <i data-lucide="shield" class="w-8 h-8 mb-8 text-white/20"></i>
+              <h3 class="font-display text-xl tracking-[0.2em] mb-6 uppercase">Global Sovereignty</h3>
+              <p class="text-[10px] tracking-[0.3em] uppercase text-white/40 leading-[2.5]">Direct encrypted shipping to over 80 sovereign nations. The empire of style has no borders.</p>
+           </div>
+        </div>
+     </div>
+  </section>
+
+  <!-- Brand Statement Overlay -->
+  <section class="relative py-32 md:py-64 bg-pure-black overflow-hidden flex items-center justify-center">
+    <div class="absolute inset-0 bg-noise opacity-5"></div>
+    <div class="container mx-auto px-6 text-center z-10">
+       <div class="max-w-4xl mx-auto">
+          <blockquote id="brand-quote" class="font-display text-4xl md:text-7xl leading-tight mb-16 opacity-0 scale-95">
+            "THE THRONE IS NOT GIVEN, <br>
+            <span class="text-white/20">IT IS CLAIMED."</span>
+          </blockquote>
+          <p class="text-xs md:text-sm tracking-[0.5em] uppercase text-white/40 max-w-xl mx-auto opacity-0 translate-y-8 quote-sub">
+             THREE CROWN WEAR represents the uncompromising intersection of heritage and modern minimalism.
+          </p>
+       </div>
+    </div>
+    <!-- Floating Crown BG -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none">
+       <svg width="800" height="800" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="0.5">
+          <path d="M 50,75 L 12,42 L 26,90 L 50,12 L 74,90 L 88,42 Z" />
+       </svg>
+    </div>
+  </section>
+
+  <!-- Signature Archive (Spotlight) -->
+  <section class="section-padding bg-pure-black border-t border-white/5 relative overflow-hidden">
+     <div class="container mx-auto">
+        <div class="flex flex-col lg:flex-row items-center gap-24">
+           <div class="flex-1 order-2 lg:order-1 spotlight-text opacity-0 -translate-x-12">
+              <span class="text-[10px] tracking-[0.6em] uppercase text-white/40 block mb-8">Premium Archive</span>
+              <h2 class="font-display text-5xl md:text-7xl lg:text-8xl leading-tight mb-12 uppercase">The CROWN <br> ROYAL Line</h2>
+              <p class="text-xs tracking-[0.4em] uppercase text-white/40 mb-16 leading-loose max-w-md">Our most regal collection. Hand-dyed pure black garments featuring sovereign-grade silver accents. Registration required for access.</p>
+              <a href="shop.html?category=premium" class="btn-primary">Detailed Preview</a>
+           </div>
+           <div class="flex-1 order-1 lg:order-2 relative spotlight-image opacity-0 translate-x-12">
+              <div class="aspect-[4/5] bg-white/5 border border-white/10 overflow-hidden relative z-10">
+                 <img src="https://images.unsplash.com/photo-1549439602-43ebca2327af?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-1000" alt="Shadow Line">
+              </div>
+              <div class="absolute -top-12 -right-12 w-full h-full border border-white/5 -z-10 animate-float-slow"></div>
+           </div>
+        </div>
+     </div>
+  </section>
+
+  <!-- Imperial Newsletter -->
+  <section class="py-32 bg-pure-black border-t border-white/5 relative">
+     <div class="container mx-auto px-6 max-w-4xl text-center">
+        <h2 class="font-display text-3xl md:text-5xl tracking-[0.1em] uppercase mb-12 newsletter-reveal opacity-0">Enter THE ARCHIVE</h2>
+        <p class="text-[10px] tracking-[0.4em] uppercase text-white/40 mb-16 newsletter-reveal opacity-0">Signatories receive early access to seasonal artifacts and royal drops.</p>
+        <form onsubmit="event.preventDefault(); ThreeCrown.showToast('PROTOCOL ACCEPTED. WELCOME TO THE KINGDOM.', 'success'); this.reset();" class="flex flex-col md:flex-row gap-6 justify-center items-center newsletter-reveal opacity-0">
+           <input type="email" placeholder="YOUR REGISTRY EMAIL" required class="bg-transparent border-b border-white/20 py-4 px-6 text-xs tracking-[0.3em] uppercase focus:outline-none focus:border-white transition-all w-full md:w-96 text-center">
+           <button type="submit" class="btn-primary py-4 px-12 text-xs">Authorize</button>
+        </form>
+     </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-pure-black border-t border-white/5 py-32 px-6 md:px-12">
+    <div class="max-w-[1800px] mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-24 lg:gap-12 mb-32">
+        <div class="lg:col-span-1">
+          <h3 class="font-display text-xl tracking-[0.3em] mb-8">THREE CROWN WEAR</h3>
+          <p class="text-white/40 text-xs tracking-widest uppercase leading-loose">
+            High performance monochrome aesthetics. <br>
+            Established 2024. <br>
+            The Kingdom Awaits.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Collections</h4>
+          <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+            <li><a href="shop.html?category=clothing" class="hover:text-white/60 transition-colors">Clothing</a></li>
+            <li><a href="shop.html?category=accessories" class="hover:text-white/60 transition-colors">Accessories</a></li>
+            <li><a href="shop.html?category=footwear" class="hover:text-white/60 transition-colors">Footwear</a></li>
+            <li><a href="shop.html?category=premium" class="hover:text-white/60 transition-colors">Crown Royal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Support</h4>
+          <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+            <li><a href="contact.html" class="hover:text-white/60 transition-colors">Contact Us</a></li>
+            <li><a href="about.html" class="hover:text-white/60 transition-colors">Our Story</a></li>
+            <li><a href="admin/index.html" class="hover:text-white/60 transition-colors">Admin Portal</a></li>
+            <li><a href="#" class="hover:text-white/60 transition-colors">Shipping & Returns</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.5em] uppercase text-white/60 mb-12">Follow</h4>
+          <div class="flex gap-8">
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+             <a href="#" class="hover:opacity-60 transition-opacity"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+          </div>
+          <div class="mt-12">
+             <p class="text-xs tracking-[0.4em] uppercase text-white/40">threecrownwear@gmail.com</p>
+             <p class="text-xs tracking-[0.4em] uppercase text-white/40 mt-2">+92 344 0455505</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-12">
+        <p class="text-[10px] tracking-[0.4em] uppercase text-white/20">&copy; 2024 THREE CROWN WEAR. All Rights Reserved.</p>
+        <div class="flex gap-12 mt-6 md:mt-0">
+           <a href="privacy.html" class="text-[10px] tracking-[0.4em] uppercase text-white/20 hover:text-white transition-colors">Privacy</a>
+           <a href="terms.html" class="text-[10px] tracking-[0.4em] uppercase text-white/20 hover:text-white transition-colors">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-[100] bg-pure-black h-screen w-full hidden opacity-0">
+     <div class="flex flex-col items-center justify-center h-full px-6">
+        <button id="close-search" class="absolute top-12 right-12 text-white/60 hover:text-white transition-colors">
+           <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <div class="w-full max-w-4xl text-center">
+           <input type="text" id="search-input" placeholder="Search the Kingdom..." class="w-full bg-transparent border-b border-white/10 py-8 text-4xl md:text-7xl font-display text-center focus:outline-none focus:border-white transition-colors placeholder:text-white/10 uppercase">
+           <div id="search-results" class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left"></div>
+        </div>
+     </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-pure-black border-l border-white/10 z-[110] translate-x-full transition-transform duration-700 ease-out">
+     <div class="flex flex-col h-full p-12">
+        <div class="flex items-center justify-between mb-16">
+           <h3 class="font-display text-2xl tracking-[0.2em] uppercase">Cart</h3>
+           <button id="close-cart" class="text-white/60 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto">
+           <!-- Items populated by JS -->
+        </div>
+        <div class="mt-12 border-t border-white/5 pt-12">
+           <div class="flex justify-between items-center mb-12">
+              <span class="text-[10px] tracking-[0.5em] uppercase text-white/40">Subtotal</span>
+              <span id="cart-total" class="font-display text-2xl">$0.00</span>
+           </div>
+           <a href="checkout.html" id="checkout-btn" class="btn-primary w-full shadow-2xl block text-center">Proceed to Checkout</a>
+        </div>
+     </div>
+  </div>
+  <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[105] hidden"></div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-12 right-12 z-[200] flex flex-col gap-4"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // GSAP Page Load Animations
+    window.addEventListener('load', () => {
+      const tl = gsap.timeline();
+      
+      tl.to('#loader-title', { opacity: 1, y: 0, duration: 1, ease: 'power4.out' })
+        .to('#loader-bar', { width: '100px', duration: 1, ease: 'power2.inOut' }, '-=0.5')
+        .to('#loader', { opacity: 0, duration: 1, ease: 'power4.inOut', onComplete: () => {
+          document.getElementById('loader').style.display = 'none';
+        }})
+        .to('.hero-reveal', { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power4.out' }, '-=0.5')
+        .to('.hero-image-reveal', { opacity: 1, scale: 1, duration: 1.5, ease: 'power4.out' }, '-=0.8');
+
+      // Scroll Animations
+      gsap.registerPlugin(ScrollTrigger);
+      
+      gsap.to('#navbar', {
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top -50',
+          toggleActions: 'play none none reverse',
+        },
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        borderColor: 'rgba(255,255,255,0.05)',
+        py: 4,
+        duration: 0.5
+      });
+
+      // New Section Animations
+      gsap.to('.attribute-card', {
+        scrollTrigger: {
+          trigger: '.attribute-card',
+          start: 'top 85%',
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.3,
+        duration: 1.2,
+        ease: 'power3.out'
+      });
+
+      gsap.to('#brand-quote', {
+        scrollTrigger: {
+          trigger: '#brand-quote',
+          start: 'top 80%',
+        },
+        opacity: 1,
+        scale: 1,
+        duration: 2,
+        ease: 'power4.out'
+      });
+
+      gsap.to('.quote-sub', {
+        scrollTrigger: {
+          trigger: '#brand-quote',
+          start: 'top 70%',
+        },
+        opacity: 1,
+        y: 0,
+        delay: 0.5,
+        duration: 1.5,
+        ease: 'power3.out'
+      });
+
+      gsap.to('.spotlight-text', {
+        scrollTrigger: {
+          trigger: '.spotlight-text',
+          start: 'top 80%',
+        },
+        opacity: 1,
+        x: 0,
+        duration: 1.5,
+        ease: 'power4.out'
+      });
+
+      gsap.to('.spotlight-image', {
+        scrollTrigger: {
+          trigger: '.spotlight-image',
+          start: 'top 80%',
+        },
+        opacity: 1,
+        x: 0,
+        duration: 1.5,
+        ease: 'power4.out'
+      });
+
+      gsap.to('.newsletter-reveal', {
+        scrollTrigger: {
+          trigger: '.newsletter-reveal',
+          start: 'top 90%',
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        duration: 1.5,
+        ease: 'power3.out'
+      });
+    });
+
+  </script>
+</body>
+</html>

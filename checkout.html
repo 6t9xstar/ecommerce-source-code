@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | THREE CROWN WEAR</title>
+  
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; font-src 'self' https: data:;">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .checkout-step { opacity: 0.3; transition: all 0.3s ease; }
+    .checkout-step.active { opacity: 1; }
+    .checkout-step.completed { opacity: 0.7; }
+    .step-number { 
+      width: 32px; height: 32px; 
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; letter-spacing: 0.1em;
+    }
+    .checkout-step.active .step-number { 
+      background: white; color: black; border-color: white;
+    }
+    .checkout-step.completed .step-number { 
+      background: rgba(255,255,255,0.1);
+    }
+    .form-section { display: none; }
+    .form-section.active { display: block; }
+  </style>
+</head>
+<body class="bg-pure-black text-pure-white selection:bg-pure-white selection:text-pure-black">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-pure-black/80 backdrop-blur-md border-b border-white/5 py-6 px-6 md:px-12">
+    <div class="max-w-[1800px] mx-auto flex items-center justify-between">
+      <a href="index.html" class="font-display text-xl tracking-[0.3em] font-medium">
+        THREE CROWN WEAR
+      </a>
+      <a href="shop.html" class="text-[10px] tracking-[0.4em] uppercase text-white/40 hover:text-white transition-all flex items-center gap-2">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> Continue Shopping
+      </a>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-32 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Header -->
+      <header class="text-center mb-16 pt-16">
+        <span class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Secure Transaction</span>
+        <h1 class="font-display text-4xl md:text-6xl uppercase tracking-[0.1em]">Checkout</h1>
+      </header>
+
+      <!-- Empty Cart State -->
+      <div id="empty-cart" class="hidden text-center py-24">
+        <i data-lucide="shopping-bag" class="w-16 h-16 mx-auto mb-8 text-white/20"></i>
+        <h2 class="font-display text-3xl mb-6">Your Kingdom is Empty</h2>
+        <p class="text-xs tracking-[0.3em] uppercase text-white/40 mb-12">Add artifacts to your collection before proceeding.</p>
+        <a href="shop.html" class="btn-primary">Browse Collections</a>
+      </div>
+
+      <!-- Checkout Content -->
+      <div id="checkout-content" class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left Column: Steps -->
+        <div class="lg:col-span-7 space-y-12">
+          
+          <!-- Progress Steps -->
+          <div class="flex items-center gap-8 mb-12">
+            <div class="checkout-step active flex items-center gap-4" data-step="1">
+              <div class="step-number">1</div>
+              <span class="text-[10px] tracking-[0.3em] uppercase">Information</span>
+            </div>
+            <div class="flex-1 h-[1px] bg-white/10"></div>
+            <div class="checkout-step flex items-center gap-4" data-step="2">
+              <div class="step-number">2</div>
+              <span class="text-[10px] tracking-[0.3em] uppercase">Shipping</span>
+            </div>
+            <div class="flex-1 h-[1px] bg-white/10"></div>
+            <div class="checkout-step flex items-center gap-4" data-step="3">
+              <div class="step-number">3</div>
+              <span class="text-[10px] tracking-[0.3em] uppercase">Payment</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Contact Information -->
+          <div id="step-1" class="form-section active">
+            <div class="glass-panel border-white/5 p-8 md:p-12">
+              <h2 class="font-display text-2xl uppercase tracking-[0.1em] mb-8">Contact Information</h2>
+              
+              <form id="contact-form" class="space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">First Name *</label>
+                    <input type="text" name="firstName" required class="input-premium" placeholder="John">
+                  </div>
+                  <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Last Name *</label>
+                    <input type="text" name="lastName" required class="input-premium" placeholder="Doe">
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Email Address *</label>
+                  <input type="email" name="email" required class="input-premium" placeholder="john@example.com">
+                </div>
+                
+                <div>
+                  <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Phone Number *</label>
+                  <input type="tel" name="phone" required class="input-premium" placeholder="+92 300 1234567">
+                </div>
+                
+                <div class="pt-4">
+                  <button type="button" onclick="Checkout.goToStep(2)" class="btn-primary w-full">
+                    Continue to Shipping <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Step 2: Shipping Address -->
+          <div id="step-2" class="form-section">
+            <div class="glass-panel border-white/5 p-8 md:p-12">
+              <h2 class="font-display text-2xl uppercase tracking-[0.1em] mb-8">Shipping Address</h2>
+              
+              <form id="shipping-form" class="space-y-8">
+                <div>
+                  <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Street Address *</label>
+                  <input type="text" name="address" required class="input-premium" placeholder="123 Royal Avenue, Suite 100">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">City *</label>
+                    <input type="text" name="city" required class="input-premium" placeholder="Karachi">
+                  </div>
+                  <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">State/Province</label>
+                    <input type="text" name="state" class="input-premium" placeholder="Sindh">
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Postal Code *</label>
+                    <input type="text" name="postalCode" required class="input-premium" placeholder="75000">
+                  </div>
+                  <div>
+                    <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Country *</label>
+                    <select name="country" required class="input-premium bg-black">
+                      <option value="">Select Country</option>
+                      <option value="PK">Pakistan</option>
+                      <option value="US">United States</option>
+                      <option value="UK">United Kingdom</option>
+                      <option value="AE">United Arab Emirates</option>
+                      <option value="SA">Saudi Arabia</option>
+                      <option value="CA">Canada</option>
+                      <option value="AU">Australia</option>
+                      <option value="DE">Germany</option>
+                      <option value="FR">France</option>
+                      <option value="JP">Japan</option>
+                      <option value="CN">China</option>
+                      <option value="IN">India</option>
+                      <option value="TR">Turkey</option>
+                      <option value="OTHER">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="text-[10px] tracking-[0.5em] uppercase text-white/40 mb-4 block">Order Notes (Optional)</label>
+                  <textarea name="notes" class="input-premium min-h-[100px]" placeholder="Special delivery instructions..."></textarea>
+                </div>
+                
+                <div class="flex gap-4 pt-4">
+                  <button type="button" onclick="Checkout.goToStep(1)" class="btn-secondary flex-1">Back</button>
+                  <button type="button" onclick="Checkout.goToStep(3)" class="btn-primary flex-1">
+                    Continue to Payment <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Step 3: Payment -->
+          <div id="step-3" class="form-section">
+            <div class="glass-panel border-white/5 p-8 md:p-12">
+              <h2 class="font-display text-2xl uppercase tracking-[0.1em] mb-8">Payment Method</h2>
+              
+              <form id="payment-form" class="space-y-8">
+                <!-- Payment Methods -->
+                <div class="space-y-4">
+                  <label class="flex items-center gap-4 p-6 border border-white/10 cursor-pointer hover:border-white/30 transition-all">
+                    <input type="radio" name="paymentMethod" value="cod" checked class="accent-white">
+                    <div class="flex-1">
+                      <span class="text-xs tracking-[0.3em] uppercase block">Cash on Delivery</span>
+                      <span class="text-[10px] tracking-[0.2em] uppercase text-white/40">Pay when you receive</span>
+                    </div>
+                    <i data-lucide="banknote" class="w-6 h-6 text-white/40"></i>
+                  </label>
+                  
+                  <label class="flex items-center gap-4 p-6 border border-white/10 cursor-pointer hover:border-white/30 transition-all">
+                    <input type="radio" name="paymentMethod" value="bank" class="accent-white">
+                    <div class="flex-1">
+                      <span class="text-xs tracking-[0.3em] uppercase block">Bank Transfer</span>
+                      <span class="text-[10px] tracking-[0.2em] uppercase text-white/40">Direct bank deposit</span>
+                    </div>
+                    <i data-lucide="landmark" class="w-6 h-6 text-white/40"></i>
+                  </label>
+                </div>
+
+                <!-- Bank Details (shown when bank selected) -->
+                <div id="bank-details" class="hidden bg-white/5 p-6 border border-white/5">
+                  <h4 class="text-[10px] tracking-[0.3em] uppercase text-white/60 mb-4">Bank Transfer Details</h4>
+                  <div class="space-y-3 text-[10px] tracking-[0.2em] uppercase text-white/40">
+                    <p>Bank: <span class="text-white">Habib Bank Limited (HBL)</span></p>
+                    <p>Account Title: <span class="text-white">Three Crown Wear</span></p>
+                    <p>Account #: <span class="text-white">1234-5678-9012-3456</span></p>
+                    <p>IBAN: <span class="text-white">PK36HABL0000001234567890</span></p>
+                  </div>
+                  <p class="text-[9px] tracking-[0.2em] uppercase text-white/30 mt-4">Please include your order number in the transfer reference.</p>
+                </div>
+
+                <!-- Terms -->
+                <div class="flex items-start gap-4 pt-4">
+                  <input type="checkbox" id="terms" required class="mt-1 accent-white">
+                  <label for="terms" class="text-[10px] tracking-[0.2em] uppercase text-white/40 leading-relaxed">
+                    I agree to the <a href="terms.html" target="_blank" class="text-white underline">Terms of Service</a> and 
+                    <a href="privacy.html" target="_blank" class="text-white underline">Privacy Policy</a>.
+                  </label>
+                </div>
+                
+                <div class="flex gap-4 pt-4">
+                  <button type="button" onclick="Checkout.goToStep(2)" class="btn-secondary flex-1">Back</button>
+                  <button type="submit" class="btn-primary flex-1">
+                    Complete Order <i data-lucide="crown" class="w-4 h-4 ml-2"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Step 4: Order Complete -->
+          <div id="step-4" class="form-section">
+            <div class="glass-panel border-white/5 p-8 md:p-12 text-center">
+              <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                <i data-lucide="check" class="w-10 h-10 text-white"></i>
+              </div>
+              <h2 class="font-display text-3xl uppercase tracking-[0.1em] mb-6">Order Confirmed</h2>
+              <p class="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">
+                Your sovereign order has been registered. A confirmation has been sent to your email.
+              </p>
+              <div class="bg-white/5 p-6 mb-8">
+                <span class="text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-2">Order Number</span>
+                <span id="order-number" class="font-display text-2xl tracking-[0.2em]">TCW-000000</span>
+              </div>
+              <div class="flex gap-4 justify-center">
+                <a href="shop.html" class="btn-primary">Continue Shopping</a>
+                <a href="index.html" class="btn-secondary">Return Home</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Order Summary -->
+        <div class="lg:col-span-5">
+          <div class="glass-panel border-white/5 p-8 sticky top-32">
+            <h3 class="font-display text-xl uppercase tracking-[0.1em] mb-8">Order Summary</h3>
+            
+            <!-- Cart Items -->
+            <div id="checkout-items" class="space-y-6 mb-8 max-h-96 overflow-y-auto">
+              <!-- Populated by JS -->
+            </div>
+            
+            <!-- Calculations -->
+            <div class="space-y-4 border-t border-white/5 pt-8">
+              <div class="flex justify-between text-[10px] tracking-[0.3em] uppercase">
+                <span class="text-white/40">Subtotal</span>
+                <span id="summary-subtotal" class="font-display">$0.00</span>
+              </div>
+              <div class="flex justify-between text-[10px] tracking-[0.3em] uppercase">
+                <span class="text-white/40">Shipping</span>
+                <span id="summary-shipping" class="font-display text-white/60">Calculated at next step</span>
+              </div>
+              <div class="flex justify-between text-[10px] tracking-[0.3em] uppercase" id="tax-row">
+                <span class="text-white/40">Tax</span>
+                <span id="summary-tax" class="font-display">$0.00</span>
+              </div>
+            </div>
+            
+            <!-- Total -->
+            <div class="flex justify-between items-center border-t border-white/10 pt-8 mt-8">
+              <span class="text-xs tracking-[0.3em] uppercase">Total</span>
+              <span id="summary-total" class="font-display text-3xl">$0.00</span>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/5">
+              <div class="text-center">
+                <i data-lucide="shield-check" class="w-5 h-5 mx-auto mb-2 text-white/40"></i>
+                <span class="text-[8px] tracking-[0.2em] uppercase text-white/30 block">Secure</span>
+              </div>
+              <div class="text-center">
+                <i data-lucide="truck" class="w-5 h-5 mx-auto mb-2 text-white/40"></i>
+                <span class="text-[8px] tracking-[0.2em] uppercase text-white/30 block">Insured</span>
+              </div>
+              <div class="text-center">
+                <i data-lucide="rotate-ccw" class="w-5 h-5 mx-auto mb-2 text-white/40"></i>
+                <span class="text-[8px] tracking-[0.2em] uppercase text-white/30 block">14-Day Returns</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-pure-black border-t border-white/5 py-16 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto text-center">
+      <p class="text-[10px] tracking-[0.4em] uppercase text-white/20">
+        &copy; 2024 THREE CROWN WEAR. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const Checkout = {
+      currentStep: 1,
+      formData: {},
+      shippingRates: {
+        'PK': 0,      // Free shipping Pakistan
+        'US': 25,     // USD
+        'UK': 20,     // GBP equivalent
+        'AE': 15,     // AED equivalent
+        'SA': 15,     // SAR equivalent
+        'CA': 25,     // CAD
+        'AU': 30,     // AUD
+        'OTHER': 35   // Rest of world
+      },
+
+      init() {
+        const cart = JSON.parse(localStorage.getItem('tcw_cart') || '[]');
+        if (cart.length === 0) {
+          document.getElementById('empty-cart').classList.remove('hidden');
+          document.getElementById('checkout-content').classList.add('hidden');
+          return;
+        }
+        
+        this.renderOrderSummary();
+        this.attachPaymentListeners();
+        lucide.createIcons();
+      },
+
+      renderOrderSummary() {
+        const cart = JSON.parse(localStorage.getItem('tcw_cart') || '[]');
+        const products = JSON.parse(localStorage.getItem('tcw_products') || '[]');
+        const container = document.getElementById('checkout-items');
+        
+        let subtotal = 0;
+        
+        container.innerHTML = cart.map(item => {
+          const product = products.find(p => p.id === item.productId);
+          if (!product) return '';
+          
+          const itemTotal = product.price * item.quantity;
+          subtotal += itemTotal;
+          
+          return `
+            <div class="flex gap-4">
+              <div class="w-20 h-24 bg-white/5 border border-white/10 overflow-hidden flex-shrink-0">
+                <img src="${product.images[0]}" class="w-full h-full object-cover" alt="${sanitizeHTML(product.name)}">
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-xs tracking-[0.2em] uppercase truncate">${sanitizeHTML(product.name)}</h4>
+                <p class="text-[10px] text-white/40 mt-1">${item.size} / ${item.color}</p>
+                <div class="flex justify-between items-center mt-2">
+                  <span class="text-[10px] text-white/40">Qty: ${item.quantity}</span>
+                  <span class="text-sm font-display">$${itemTotal.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+        
+        document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        this.updateTotal(subtotal);
+      },
+
+      updateTotal(subtotal) {
+        const country = document.querySelector('select[name="country"]')?.value || '';
+        const shipping = country ? (this.shippingRates[country] ?? this.shippingRates['OTHER']) : 0;
+        const tax = subtotal * 0.05; // 5% tax
+        const total = subtotal + shipping + tax;
+        
+        document.getElementById('summary-shipping').textContent = shipping === 0 && country === 'PK' 
+          ? 'FREE' 
+          : (country ? `$${shipping.toFixed(2)}` : 'Calculated at next step');
+        document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+      },
+
+      goToStep(step) {
+        // Validate current step
+        if (step > this.currentStep && !this.validateStep(this.currentStep)) {
+          return;
+        }
+        
+        // Save current step data
+        this.saveStepData(this.currentStep);
+        
+        // Update UI
+        document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+        document.getElementById(`step-${step}`).classList.add('active');
+        
+        // Update step indicators
+        document.querySelectorAll('.checkout-step').forEach(s => {
+          const stepNum = parseInt(s.dataset.step);
+          s.classList.remove('active', 'completed');
+          if (stepNum === step) s.classList.add('active');
+          else if (stepNum < step) s.classList.add('completed');
+        });
+        
+        this.currentStep = step;
+        
+        // Update shipping if on step 2
+        if (step === 2) {
+          document.querySelector('select[name="country"]')?.addEventListener('change', () => {
+            this.renderOrderSummary();
+          });
+        }
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+
+      validateStep(step) {
+        const form = document.getElementById(step === 1 ? 'contact-form' : step === 2 ? 'shipping-form' : 'payment-form');
+        if (!form) return true;
+        
+        const required = form.querySelectorAll('[required]');
+        let valid = true;
+        
+        required.forEach(field => {
+          if (!field.value.trim()) {
+            valid = false;
+            field.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+            setTimeout(() => field.style.borderColor = '', 3000);
+          }
+        });
+        
+        if (!valid) {
+          ThreeCrown.showToast('Please complete all required fields', 'error');
+        }
+        
+        return valid;
+      },
+
+      saveStepData(step) {
+        const form = document.getElementById(step === 1 ? 'contact-form' : step === 2 ? 'shipping-form' : 'payment-form');
+        if (form) {
+          const data = new FormData(form);
+          data.forEach((value, key) => {
+            this.formData[key] = value;
+          });
+        }
+      },
+
+      attachPaymentListeners() {
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+          radio.addEventListener('change', (e) => {
+            const bankDetails = document.getElementById('bank-details');
+            if (e.target.value === 'bank') {
+              bankDetails.classList.remove('hidden');
+            } else {
+              bankDetails.classList.add('hidden');
+            }
+          });
+        });
+
+        document.getElementById('payment-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          this.completeOrder();
+        });
+      },
+
+      completeOrder() {
+        const cart = JSON.parse(localStorage.getItem('tcw_cart') || '[]');
+        const products = JSON.parse(localStorage.getItem('tcw_products') || '[]');
+        
+        // Calculate totals
+        let subtotal = 0;
+        cart.forEach(item => {
+          const product = products.find(p => p.id === item.productId);
+          if (product) subtotal += product.price * item.quantity;
+        });
+        
+        const country = this.formData.country || 'PK';
+        const shipping = this.shippingRates[country] ?? this.shippingRates['OTHER'];
+        const tax = subtotal * 0.05;
+        const total = subtotal + shipping + tax;
+        
+        // Create order
+        const order = {
+          id: 'TCW-' + Date.now().toString().slice(-6),
+          date: new Date().toISOString(),
+          status: 'pending',
+          customer: {
+            firstName: this.formData.firstName,
+            lastName: this.formData.lastName,
+            email: this.formData.email,
+            phone: this.formData.phone
+          },
+          shipping: {
+            address: this.formData.address,
+            city: this.formData.city,
+            state: this.formData.state,
+            postalCode: this.formData.postalCode,
+            country: this.formData.country,
+            notes: this.formData.notes
+          },
+          items: cart,
+          payment: {
+            method: this.formData.paymentMethod || 'cod',
+            status: 'pending'
+          },
+          totals: {
+            subtotal: subtotal,
+            shipping: shipping,
+            tax: tax,
+            total: total
+          }
+        };
+        
+        // Save to orders
+        const orders = JSON.parse(localStorage.getItem('tcw_orders') || '[]');
+        orders.unshift(order);
+        localStorage.setItem('tcw_orders', JSON.stringify(orders));
+        
+        // Clear cart
+        localStorage.setItem('tcw_cart', '[]');
+        
+        // Show confirmation
+        document.getElementById('order-number').textContent = order.id;
+        document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('step-4').classList.add('active');
+        
+        // Update all step indicators to completed
+        document.querySelectorAll('.checkout-step').forEach(s => {
+          s.classList.remove('active');
+          s.classList.add('completed');
+        });
+        
+        // Send confirmation via Web3Forms
+        this.sendConfirmationEmail(order);
+        
+        lucide.createIcons();
+      },
+
+      sendConfirmationEmail(order) {
+        // Send confirmation to customer and admin
+        const formData = new FormData();
+        formData.append('access_key', '0f2c6c7a-2483-4172-aa7e-23fedd85f5ec');
+        formData.append('subject', `Order Confirmation - ${order.id}`);
+        formData.append('from_name', 'THREE CROWN WEAR');
+        formData.append('to', order.customer.email);
+        formData.append('name', `${order.customer.firstName} ${order.customer.lastName}`);
+        formData.append('email', order.customer.email);
+        formData.append('message', `
+Order ${order.id} has been confirmed.
+
+Total: $${order.totals.total.toFixed(2)}
+Payment Method: ${order.payment.method === 'cod' ? 'Cash on Delivery' : 'Bank Transfer'}
+
+Thank you for shopping with THREE CROWN WEAR.
+        `);
+        
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        }).catch(() => {}); // Silent fail - order already saved
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Checkout.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | THREE CROWN WEAR Admin</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    :root {
+      --admin-bg: #000000;
+      --admin-text: #FFFFFF;
+      --admin-border: rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body class="bg-pure-black text-pure-white selection:bg-pure-white selection:text-pure-black min-h-screen">
+
+  <div class="flex h-screen overflow-hidden">
+     <!-- Sidebar -->
+     <aside class="w-80 border-r border-white/5 bg-pure-black hidden lg:flex flex-col p-12">
+        <div class="mb-24">
+           <h2 class="font-display text-xl tracking-[0.3em] uppercase">THREE CROWN</h2>
+           <span class="text-[9px] tracking-[0.4em] uppercase text-white/20">Archive Registry</span>
+        </div>
+
+        <nav class="flex-1 space-y-12">
+           <div>
+              <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">Registry</h4>
+              <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+                 <li><a href="dashboard.html" class="text-white">Dashboard</a></li>
+                 <li><a href="products.html" class="text-white/40 hover:text-white transition-all">Artifacts</a></li>
+                 <li><a href="categories.html" class="text-white/40 hover:text-white transition-all">Collections</a></li>
+              </ul>
+           </div>
+
+           <div>
+              <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">Navigation</h4>
+              <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+                 <li><a href="../index.html" class="text-white/40 hover:text-white transition-all flex items-center gap-2">&larr; Return to Kingdom</a></li>
+              </ul>
+           </div>
+
+           <div>
+              <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">Security</h4>
+              <ul class="space-y-6 text-xs tracking-[0.3em] uppercase">
+                 <li><a href="#" onclick="logout()" class="text-white/40 hover:text-red-500 transition-all">Terminal Exit</a></li>
+              </ul>
+           </div>
+        </nav>
+
+        <div class="mt-auto">
+           <div class="px-4 py-3 bg-white/5 border border-white/10 rounded-sm">
+              <p class="text-[9px] tracking-[0.4em] uppercase text-white/20 mb-1">Status</p>
+              <p class="text-xs tracking-[0.1em] uppercase text-green-500">Sovereign Live</p>
+           </div>
+        </div>
+     </aside>
+
+     <!-- Main Content -->
+     <main class="flex-1 overflow-y-auto px-6 md:px-24 py-24 bg-pure-black relative">
+        <div class="absolute inset-x-0 top-0 h-64 bg-monochrome-glow opacity-30 z-0"></div>
+        <div class="relative z-10">
+           
+           <header class="flex justify-between items-end mb-24">
+              <div>
+                 <span id="admin-user" class="text-[10px] tracking-[0.5em] uppercase text-white/40 block mb-6">Welcome Back, ADMIN</span>
+                 <h1 class="font-display text-4xl md:text-6xl uppercase tracking-[0.1em]">Dashboard</h1>
+              </div>
+              <div class="hidden md:flex gap-4">
+                 <a href="products.html?action=add" class="btn-primary py-3 px-8 text-xs">Register Artifact</a>
+              </div>
+           </header>
+
+           <!-- Stats Grid -->
+           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-32">
+              <div class="glass-panel border-white/5 p-12 hover:border-white/20 transition-all">
+                 <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-12">Total Artifacts</h4>
+                 <p id="total-products" class="font-display text-5xl mb-4">0</p>
+                 <span class="text-[9px] tracking-[0.3em] uppercase text-green-500">Inventory Live</span>
+              </div>
+              
+              <div class="glass-panel border-white/5 p-12 hover:border-white/20 transition-all">
+                 <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-12">Collections</h4>
+                 <p id="total-categories" class="font-display text-5xl mb-4">0</p>
+                 <span class="text-[9px] tracking-[0.3em] uppercase text-white/40">Active Archives</span>
+              </div>
+
+              <div class="glass-panel border-white/5 p-12 hover:border-white/20 transition-all">
+                 <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-12">Limited Pieces</h4>
+                 <p id="limited-products" class="font-display text-5xl mb-4">0</p>
+                 <span class="text-[9px] tracking-[0.3em] uppercase text-white/20">Crown Royal Line</span>
+              </div>
+
+              <div class="glass-panel border-white/5 p-12 hover:border-white/20 border-red-500/20 transition-all">
+                 <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-12">Low Inventory</h4>
+                 <p id="low-stock" class="font-display text-5xl mb-4 text-red-500">0</p>
+                 <span id="low-stock-status" class="text-[9px] tracking-[0.3em] uppercase text-white/20">All Secure</span>
+              </div>
+           </div>
+
+           <!-- Recent History -->
+           <div class="space-y-12 mb-32">
+              <div class="flex items-center justify-between">
+                 <h3 class="font-display text-2xl uppercase tracking-[0.2em]">Recent Registry Entries</h3>
+                 <a href="products.html" class="text-[10px] tracking-[0.4em] uppercase text-white/40 hover:text-white transition-all">Browse all</a>
+              </div>
+              <div id="recent-products" class="glass-panel border-white/5 p-0 overflow-hidden">
+                 <div id="recent-list-container" class="overflow-x-auto">
+                    <!-- Dynamic List -->
+                    <p class="text-white/20 text-center py-24 text-xs tracking-[0.4em] uppercase">No archives detected. Begin entry now.</p>
+                 </div>
+              </div>
+           </div>
+
+           <!-- Quick Links -->
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div class="glass-panel p-12 hover:border-white/20 transition-all group">
+                 <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">System Tool</h4>
+                 <h3 class="font-display text-2xl uppercase mb-12">Export Repository</h3>
+                 <button onclick="exportData()" class="btn-secondary w-full text-xs">Extract JSON Artifact</button>
+              </div>
+              <div class="glass-panel p-12 hover:border-white/20 transition-all">
+                 <h4 class="text-[9px] tracking-[0.5em] uppercase text-white/40 mb-8">Archive Maintenance</h4>
+                 <h3 class="font-display text-2xl uppercase mb-12">Registry Backup</h3>
+                 <p class="text-[10px] tracking-[0.3em] uppercase text-white/20 mb-12 leading-relaxed">Ensure regular backups to the sovereign secure environment.</p>
+              </div>
+           </div>
+
+        </div>
+     </main>
+  </div>
+
+  <!-- Mobile Nav (Simple overlay) -->
+  <button id="mobile-menu-trigger" class="lg:hidden fixed bottom-12 right-12 bg-white text-black w-12 h-12 rounded-full flex items-center justify-center z-50">
+     <i data-lucide="menu" class="w-6 h-6"></i>
+  </button>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Authentication Check
+    if (localStorage.getItem('tcw_admin') !== 'true') {
+       window.location.href = 'index.html';
+    }
+
+    const Dashboard = {
+       init() {
+          this.loadData();
+          lucide.createIcons();
+       },
+
+       loadData() {
+          const products = JSON.parse(localStorage.getItem('tcw_products') || '[]');
+          const categories = JSON.parse(localStorage.getItem('tcw_categories') || '[]');
+          
+          document.getElementById('total-products').textContent = products.length;
+          document.getElementById('total-categories').textContent = categories.length;
+          
+          const limitedCount = products.filter(p => p.isLimitedEdition).length;
+          document.getElementById('limited-products').textContent = limitedCount;
+          
+          const lowStock = products.filter(p => p.stock < 10);
+          document.getElementById('low-stock').textContent = lowStock.length;
+          if (lowStock.length > 0) {
+             document.getElementById('low-stock-status').textContent = 'Attention Required';
+             document.getElementById('low-stock-status').classList.remove('text-white/20');
+             document.getElementById('low-stock-status').classList.add('text-red-500');
+          }
+
+          this.renderRecent(products);
+       },
+
+       renderRecent(products) {
+          const container = document.getElementById('recent-list-container');
+          if (products.length === 0) return;
+
+          const recent = products.slice(-5).reverse();
+          container.innerHTML = `
+             <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-white/5">
+                       <th class="p-12 text-[9px] tracking-[0.5em] uppercase text-white/40">Artifact</th>
+                       <th class="p-12 text-[9px] tracking-[0.5em] uppercase text-white/40">Collection</th>
+                       <th class="p-12 text-[9px] tracking-[0.5em] uppercase text-white/40">Valuation</th>
+                       <th class="p-12 text-[9px] tracking-[0.5em] uppercase text-white/40">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   ${recent.map(p => `
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-all">
+                         <td class="p-12 flex items-center gap-6">
+                            <img src="${p.images[0]}" class="w-12 h-16 object-cover bg-white/10" alt="">
+                            <span class="text-xs tracking-[0.2em] uppercase font-medium">${sanitizeHTML(p.name)}</span>
+                         </td>
+                         <td class="p-12 text-xs tracking-[0.2em] uppercase text-white/40">${sanitizeHTML(p.category)}</td>
+                          <td class="p-12 font-display text-lg tracking-[0.1em]">$${p.price.toFixed(2)}</td>
+                          <td class="p-12">
+                             <a href="products.html?edit=${p.id}" class="text-[9px] tracking-[0.2em] uppercase border-b border-white/10 hover:border-white transition-all pb-1">Edit Artifact</a>
+                          </td>
+                      </tr>
+                   `).join('')}
+                </tbody>
+             </table>
+          `;
+       }
+    };
+
+    function logout() {
+       localStorage.removeItem('tcw_admin');
+       localStorage.removeItem('tcw_admin_user');
+       window.location.href = '../index.html';
+    }
+
+    function exportData() {
+       const data = {
+          products: JSON.parse(localStorage.getItem('tcw_products') || '[]'),
+          categories: JSON.parse(localStorage.getItem('tcw_categories') || '[]'),
+          exportedAt: new Date().toISOString()
+       };
+       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+       const url = URL.createObjectURL(blob);
+       const a = document.createElement('a');
+       a.href = url;
+       a.download = `three-crown-repository-${Date.now()}.json`;
+       a.click();
+       URL.revokeObjectURL(url);
+       ThreeCrown.showToast('Repository Extracted Successfully.', 'success');
+    }
+
+     document.addEventListener('DOMContentLoaded', () => {
+        Dashboard.init();
+        
+        // Mobile Menu Toggle
+        const trigger = document.getElementById('mobile-menu-trigger');
+        const aside = document.querySelector('aside');
+        if (trigger && aside) {
+           trigger.addEventListener('click', () => {
+              aside.classList.toggle('hidden');
+              aside.classList.toggle('fixed');
+              aside.classList.toggle('inset-0');
+              aside.classList.toggle('z-[60]');
+           });
+        }
+     });
+  </script>
+</body>
+</html>
