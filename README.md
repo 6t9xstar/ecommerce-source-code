@@ -43,7 +43,7 @@ This repository contains the full source code for a premium, high-performance E-
 ### Installation
 1. Clone the repository to your local architecture:
    ```bash
-   git clone https://github.com/your-username/ecommerce-source-code.git
+   git clone https://github.com/6t9xstar/ecommerce-source-code.git
    ```
 2. Open `index.html` in your browser or host the files on your server.
 
