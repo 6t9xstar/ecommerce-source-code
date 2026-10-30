@@ -1,5 +1,7 @@
 # 👑 Full E-Commerce Website Source Code
 
+![GitHub stars](https://img.shields.io/github/stars/6t9xstar/ecommerce-source-code?style=social)
+
 This repository contains the full source code for a premium, high-performance E-commerce platform. Developed by **Malik Taimoor Awan** (Apex Software Technology), this project demonstrates a modern, monochrome aesthetic with enterprise-grade features.
 
 > [!NOTE]
